@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="1.0" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="be:e-contract:jwatchdog:notifier:twilio:1.0"
+	xmlns:tns="be:e-contract:jwatchdog:notifier:twilio:1.0">
+
+	<element name="twilio" type="tns:twilio-type" />
+
+	<complexType name="twilio-type">
+		<attribute name="account" type="xs:string" />
+		<attribute name="token" type="xs:string" />
+		<attribute name="from" type="xs:string"/>
+		<attribute name="to" type="xs:string"/>
+	</complexType>
+
+</schema>
