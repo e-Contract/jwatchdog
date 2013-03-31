@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+	sleep="10">
+	<datasource name="load-shortterm">
+		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd"
+			dataSourceName="shortterm" />
+	</datasource>
+	<notifier name="twilio">
+		<twilio:twilio xmlns:twilio="be:e-contract:jwatchdog:notifier:twilio:1.0"
+			account="1234" token="5678" from="+32478299492" to="+32478299492" />
+	</notifier>
+	<trigger description="Load to high" datasource="load-shortterm"
+		notifier="twilio">
+		<condition>
+			<above value="1.0" />
+		</condition>
+	</trigger>
+</jwatchdog-config>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="1.0" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="be:e-contract:jwatchdog:1.0" xmlns:tns="be:e-contract:jwatchdog:1.0">
+
+	<element name="jwatchdog-config" type="tns:jwatchdog-config-type" />
+
+	<complexType name="jwatchdog-config-type">
+		<sequence>
+			<element name="datasource" type="tns:datasource-type"
+				maxOccurs="unbounded" />
+			<element name="notifier" type="tns:notifier-type" maxOccurs="unbounded" />
+			<element name="notifier-group" type="tns:notifier-group-type"
+				maxOccurs="unbounded" />
+			<element name="trigger" type="tns:trigger-type" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="sleep" type="xs:int" use="required">
+			<annotation>
+				<documentation>
+					Indicates how long the watchdog sleeps in between its
+					watches.
+					Expressed in minutes.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="notificationPrefix" type="xs:string">
+			<annotation>
+				<documentation>
+					The message prefix to be used when invoking a
+					notifier.
+				</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+
+	<complexType name="datasource-type">
+		<sequence>
+			<any />
+		</sequence>
+		<attribute name="name" type="xs:ID" />
+	</complexType>
+
+	<complexType name="notifier-type">
+		<sequence>
+			<any />
+		</sequence>
+		<attribute name="name" type="xs:ID" />
+	</complexType>
+
+	<complexType name="notifier-group-type">
+		<sequence>
+			<element name="notifier" type="tns:notifier-group-element"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name" type="xs:ID" />
+	</complexType>
+
+	<complexType name="notifier-group-element">
+		<attribute name="name" type="xs:string" />
+	</complexType>
+
+	<complexType name="trigger-type">
+		<sequence>
+			<element name="condition" type="tns:condition-type" />
+		</sequence>
+		<attribute name="description" type="xs:string" />
+		<attribute name="datasource" type="xs:string" />
+		<attribute name="notifier" type="xs:string" />
+	</complexType>
+
+	<complexType name="condition-type">
+		<all>
+			<element name="above" type="tns:above-type" />
+			<element name="below" type="tns:below-type" />
+			<element name="script" type="tns:script-type" />
+		</all>
+	</complexType>
+
+	<complexType name="above-type">
+		<attribute name="value" type="xs:double" />
+	</complexType>
+
+	<complexType name="below-type">
+		<attribute name="value" type="xs:double" />
+	</complexType>
+
+	<complexType name="script-type">
+		<simpleContent>
+			<extension base="xs:string">
+				<attribute name="type" type="xs:string" />
+				<attribute name="allowMultipleNotifications" type="xs:boolean"
+					default="false" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+</schema>

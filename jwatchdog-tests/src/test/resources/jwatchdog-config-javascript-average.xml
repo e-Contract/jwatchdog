@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+	sleep="1">
+	<datasource name="static">
+		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>1.0</static:value>
+			<static:value>2.0</static:value>
+			<static:value>3.0</static:value>
+			<static:value>4.0</static:value>
+			<static:value>5.0</static:value>
+			<static:value>6.0</static:value>
+			<static:value>7.0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="console">
+		<console:console xmlns:console="be:e-contract:jwatchdog:notifier:console:1.0" />
+	</notifier>
+	<trigger description="Hello world" datasource="static"
+		notifier="console">
+		<condition>
+			<script type="text/javascript" allowMultipleNotifications="true">
+				<![CDATA[
+					function movingAverage(values, points) {
+						var avgValues = new Array();
+						for (idx = 0; idx < values.length - points + 1; idx++) {
+							avgValues[idx] = 0;
+							for (count = 0; count < points; count++) {
+								avgValues[idx] += values[idx + count];
+							}
+							avgValues[idx] /= points;
+						}
+						return avgValues;
+					}
+					
+					function main() {
+						var avgValues = movingAverage(values, 5);
+						for (idx = 0; idx < avgValues.length; idx++) {
+							println("value: " + avgValues[idx]);
+							if (avgValues[idx] > 2.0) {
+								notifier.notify("alert");
+								//return;
+							}
+						}
+						notifier.notify("notification message");
+					}
+					
+					main();
+				]]>
+			</script>
+		</condition>
+	</trigger>
+</jwatchdog-config>

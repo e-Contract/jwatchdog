@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+	sleep="1">
+	<datasource name="static">
+		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>1.0</static:value>
+			<static:value>2.0</static:value>
+			<static:value>3.0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="console">
+		<console:console xmlns:console="be:e-contract:jwatchdog:notifier:console:1.0" />
+	</notifier>
+	<notifier name="script">
+		<script:script xmlns:script="be:e-contract:jwatchdog:notifier:script:1.0"
+			type="text/javascript">
+			println("javascript says: " + message);
+		</script:script>
+	</notifier>
+	<notifier-group name="group">
+		<notifier name="console" />
+		<notifier name="script" />
+	</notifier-group>
+	<trigger description="Hello world" datasource="static"
+		notifier="group">
+		<condition>
+			<above value="2.5" />
+		</condition>
+	</trigger>
+</jwatchdog-config>
