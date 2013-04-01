@@ -31,8 +31,11 @@ public class ScriptObject {
 
 	public final Notifier notifier;
 
-	public ScriptObject(double[] values, Notifier notifier) {
+	public final String description;
+
+	public ScriptObject(double[] values, Notifier notifier, String description) {
 		this.values = values;
 		this.notifier = notifier;
+		this.description = description;
 	}
 }
