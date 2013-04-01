@@ -61,12 +61,16 @@ public class Main {
 			return;
 		}
 		Config config = new Config(configFile.toURI().toURL());
-		while (true) {
+		boolean loop = true;
+		while (loop) {
 			config.reload();
 			JwatchdogConfigType watchdogConfig = config.getConfig();
 			Integer sleepMinutes;
 			if (null != watchdogConfig) {
 				sleepMinutes = watchdogConfig.getSleep();
+				if (false == watchdogConfig.isLoop()) {
+					loop = false;
+				}
 				DatasourceFactory datasourceFactory = new DatasourceFactory(
 						watchdogConfig.getDatasource());
 				Map<String, Datasource> datasources = datasourceFactory
@@ -84,8 +88,10 @@ public class Main {
 			} else {
 				sleepMinutes = 10;
 			}
-			LOG.debug("sleeping for " + sleepMinutes + " minutes");
-			Thread.sleep(sleepMinutes * 60 * 1000);
+			if (loop) {
+				LOG.debug("sleeping for " + sleepMinutes + " minutes");
+				Thread.sleep(sleepMinutes * 60 * 1000);
+			}
 		}
 	}
 
