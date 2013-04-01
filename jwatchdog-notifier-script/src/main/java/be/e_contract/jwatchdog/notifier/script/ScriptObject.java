@@ -18,7 +18,12 @@
 
 package be.e_contract.jwatchdog.notifier.script;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class ScriptObject {
+
+	public static final Log log = LogFactory.getLog(ScriptObject.class);
 
 	public final String message;
 

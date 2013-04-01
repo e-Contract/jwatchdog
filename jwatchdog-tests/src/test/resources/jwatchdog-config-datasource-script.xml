@@ -5,6 +5,7 @@
 		<script:script xmlns:script="be:e-contract:jwatchdog:datasource:script:1.0"
 			type="text/javascript">
 			<![CDATA[
+				jwatchdog.log.debug("javascript debug logging");
 				println("minutes: " + jwatchdog.datasource.getMinutes());
 				jwatchdog.datasource.setValues([1.0, 3.0]);
 				jwatchdog.datasource.values = [1.0, 2.0, 2.1, 4.0];

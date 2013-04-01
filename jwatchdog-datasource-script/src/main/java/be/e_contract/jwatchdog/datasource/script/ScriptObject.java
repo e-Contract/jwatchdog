@@ -18,9 +18,14 @@
 
 package be.e_contract.jwatchdog.datasource.script;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.e_contract.jwatchdog.datasource.Datasource;
 
 public class ScriptObject {
+
+	public static final Log log = LogFactory.getLog(ScriptObject.class);
 
 	public final Datasource datasource;
 

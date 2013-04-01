@@ -18,9 +18,14 @@
 
 package be.e_contract.jwatchdog;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.e_contract.jwatchdog.notifier.Notifier;
 
 public class ScriptObject {
+
+	public static final Log log = LogFactory.getLog(ScriptObject.class);
 
 	public final double[] values;
 

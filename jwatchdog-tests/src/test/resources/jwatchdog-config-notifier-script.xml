@@ -11,6 +11,7 @@
 	<notifier name="script">
 		<script:script xmlns:script="be:e-contract:jwatchdog:notifier:script:1.0"
 			type="text/javascript">
+			jwatchdog.log.debug("javascript debug logging");
 			println("javascript says: " + jwatchdog.message);
 		</script:script>
 	</notifier>
