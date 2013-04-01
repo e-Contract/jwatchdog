@@ -55,61 +55,61 @@
 		<notifier name="spryng" />
 		<notifier name="mail" />
 	</notifier-group>
-	<trigger description="Load to high" datasource="load-shortterm"
+	<trigger description="Load too high" datasource="load-shortterm"
 		notifier="group">
 		<condition>
 			<above value="2.0" />
 		</condition>
 	</trigger>
-	<trigger description="Temperature to high" datasource="temp"
+	<trigger description="Temperature too high" datasource="temp"
 		notifier="group">
 		<condition>
 			<above value="25" />
 		</condition>
 	</trigger>
-	<trigger description="Root disk space to low" datasource="root"
+	<trigger description="Root disk space too low" datasource="root"
 		notifier="group">
 		<condition>
 			<below value="10 GiB" />
 		</condition>
 	</trigger>
-	<trigger description="Home disk space to low" datasource="home"
+	<trigger description="Home disk space too low" datasource="home"
 		notifier="group">
 		<condition>
 			<below value="10 GiB" />
 		</condition>
 	</trigger>
-	<trigger description="Used memory to high" datasource="memory-used"
+	<trigger description="Used memory too high" datasource="memory-used"
 		notifier="group">
 		<condition>
 			<above value="15 GiB" />
 		</condition>
 	</trigger>
-	<trigger description="JBoss used memory to high" datasource="jboss-memory-used"
+	<trigger description="JBoss used memory too high" datasource="jboss-memory-used"
 		notifier="group">
 		<condition>
 			<above value="1.5 GiB" />
 		</condition>
 	</trigger>
-	<trigger description="JBoss used perm gen memory to high"
+	<trigger description="JBoss used perm gen memory too high"
 		datasource="jboss-perm-memory-used" notifier="group">
 		<condition>
 			<above value="400 MiB" />
 		</condition>
 	</trigger>
-	<trigger description="JBoss open files to high" datasource="jboss-files"
+	<trigger description="JBoss open files too high" datasource="jboss-files"
 		notifier="group">
 		<condition>
 			<above value="2048" />
 		</condition>
 	</trigger>
-	<trigger description="JBoss threads to high" datasource="jboss-threads"
+	<trigger description="JBoss threads too high" datasource="jboss-threads"
 		notifier="group">
 		<condition>
 			<above value="512" />
 		</condition>
 	</trigger>
-	<trigger description="eID IdP response time to high"
+	<trigger description="eID IdP response time too high"
 		datasource="idp-response-time" notifier="group">
 		<condition>
 			<script type="text/javascript">
@@ -129,7 +129,7 @@
 					function main() {
 						for (idx = 0; idx < jwatchdog.values.length; idx++) {
 							if (jwatchdog.values[idx] > 2.0) {
-								jwatchdog.notifier.notify("eID IdP response time to high (peek)");
+								jwatchdog.notifier.notify("eID IdP response time too high (peek)");
 								return;
 							}
 	 					}
@@ -137,7 +137,7 @@
 						var avgValues = movingAverage(jwatchdog.values, 5);
 						for (idx = 0; idx < avgValues.length; idx++) {
 							if (avgValues[idx] > 1.0) {
-								jwatchdog.notifier.notify("eID IdP response time to high (avg)");	
+								jwatchdog.notifier.notify("eID IdP response time too high (avg)");	
 								return;
 							}
 						}

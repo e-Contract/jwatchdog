@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jwatchdog-config
-    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xmlns='be:e-contract:jwatchdog:1.0'
-    xsi:schemaLocation='be:e-contract:jwatchdog:1.0 file:/home/fcorneli/jwatchdog/jwatchdog-core/src/main/resources/jwatchdog-config.xsd'
-    sleep="10">
-    <datasource name="load-shortterm">
-        <rrd file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd" dataSourceName="shortterm"/>
-    </datasource>
-    <notifier name="twilio">
-        <twilio account="1234" to="+32478299492"/>
-    </notifier>
-    <trigger description="Load to high" datasource="load-shortterm"
-    	notifier="twilio">
-        <condition>
-            <above value="1.0"/>
-        </condition>
-    </trigger>
+<jwatchdog-config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns='be:e-contract:jwatchdog:1.0'
+	xsi:schemaLocation='be:e-contract:jwatchdog:1.0 file:/home/fcorneli/jwatchdog/jwatchdog-core/src/main/resources/jwatchdog-config.xsd'
+	sleep="10">
+	<datasource name="load-shortterm">
+		<rrd file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd"
+			dataSourceName="shortterm" />
+	</datasource>
+	<notifier name="twilio">
+		<twilio account="1234" to="+32478299492" />
+	</notifier>
+	<trigger description="Load too high" datasource="load-shortterm"
+		notifier="twilio">
+		<condition>
+			<above value="1.0" />
+		</condition>
+	</trigger>
 </jwatchdog-config>
