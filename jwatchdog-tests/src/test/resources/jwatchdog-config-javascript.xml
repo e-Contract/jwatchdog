@@ -16,7 +16,7 @@
 		<condition>
 			<script type="text/javascript">
 				<![CDATA[
-					jwatchdog.log.debug("javascript debug logging");
+					jwatchdog.log.debug("javascript debug logging: " + jwatchdog.description);
 					println("hello world from javascript");
 					for (idx = 0; idx < jwatchdog.values.length; idx++) {
 						println("value: " + jwatchdog.values[idx]);
