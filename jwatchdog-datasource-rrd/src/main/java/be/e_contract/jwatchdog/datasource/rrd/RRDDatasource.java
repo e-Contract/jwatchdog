@@ -57,11 +57,17 @@ public class RRDDatasource implements Datasource {
 		} catch (IOException e) {
 			throw new RuntimeException("RRD IO error: " + e.getMessage());
 		}
-		Date lastUpdate = rrd.getLastUpdate();
+
+		DateTime lastUpdate = new DateTime(rrd.getLastUpdate());
 		LOG.debug("last update: " + lastUpdate);
+		DateTime now = new DateTime();
+		if (lastUpdate.isBefore(now.minusMinutes(minutes))) {
+			LOG.warn("RRD outdated");
+		}
+
 		Header header = rrd.getHeader();
 		int primaryDataPointInterval = header.getPDPStep();
-		DateTime endDateTime = new DateTime(lastUpdate)
+		DateTime endDateTime = lastUpdate
 				.minusSeconds(primaryDataPointInterval);
 		DateTime startDateTime = endDateTime.minusMinutes(minutes);
 		DataChunk dataChunk;
@@ -75,18 +81,25 @@ public class RRDDatasource implements Datasource {
 		double[][] data = dataChunk.getData();
 		Set<String> dataSourceNames = rrd.getDataSourcesName();
 		LOG.debug("RRD datasources: " + dataSourceNames);
-		if (!dataSourceNames.contains(this.datasourceName)) {
-			LOG.warn("RRD datasource name not found: " + this.datasourceName);
-			return new double[] {};
-		}
-		int size = dataSourceNames.size();
+
 		int dsIdx;
-		for (dsIdx = 0; dsIdx < size; dsIdx++) {
-			DataSource dataSource = rrd.getDataSource(dsIdx);
-			if (dataSource.getName().equals(this.datasourceName)) {
-				break;
+		if (null != this.datasourceName) {
+			if (!dataSourceNames.contains(this.datasourceName)) {
+				LOG.warn("RRD datasource name not found: "
+						+ this.datasourceName);
+				return new double[] {};
 			}
+			int size = dataSourceNames.size();
+			for (dsIdx = 0; dsIdx < size; dsIdx++) {
+				DataSource dataSource = rrd.getDataSource(dsIdx);
+				if (dataSource.getName().equals(this.datasourceName)) {
+					break;
+				}
+			}
+		} else {
+			dsIdx = 0;
 		}
+
 		double[] values = new double[data.length];
 		for (int idx = 0; idx < data.length; idx++) {
 			values[data.length - idx - 1] = data[idx][dsIdx];

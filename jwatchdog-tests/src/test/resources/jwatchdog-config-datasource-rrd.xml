@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+	sleep="10">
+	<datasource name="rrd">
+		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-root/df_complex-free.rrd" />
+	</datasource>
+	<notifier name="console">
+		<console:console xmlns:console="be:e-contract:jwatchdog:notifier:console:1.0" />
+	</notifier>
+	<trigger description="Hello world" datasource="rrd" notifier="console">
+		<condition>
+			<below value="1" />
+		</condition>
+	</trigger>
+</jwatchdog-config>

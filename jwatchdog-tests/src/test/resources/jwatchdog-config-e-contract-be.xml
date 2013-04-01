@@ -8,48 +8,39 @@
 	</datasource>
 	<datasource name="temp">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/ipmi/temperature-Ambient Temp system_board (7.1).rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/ipmi/temperature-Ambient Temp system_board (7.1).rrd" />
 	</datasource>
 	<datasource name="root">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-root/df_complex-free.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-root/df_complex-free.rrd" />
 	</datasource>
 	<datasource name="home">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-home/df_complex-free.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-home/df_complex-free.rrd" />
 	</datasource>
 	<datasource name="memory-used">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/memory/memory-used.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/memory/memory-used.rrd" />
 	</datasource>
 	<datasource name="jboss-memory-used">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-memory_pool-CMS Old Gen/memory-used.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-memory_pool-CMS Old Gen/memory-used.rrd" />
 	</datasource>
 	<datasource name="jboss-perm-memory-used">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-memory_pool-CMS Perm Gen/memory-used.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-memory_pool-CMS Perm Gen/memory-used.rrd" />
 	</datasource>
 	<datasource name="jboss-files">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-operating_system/gauge-OpenFileDescriptorCount.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-operating_system/gauge-OpenFileDescriptorCount.rrd" />
 	</datasource>
 	<datasource name="jboss-threads">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-threading/gauge-ThreadCount.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/GenericJMX-threading/gauge-ThreadCount.rrd" />
 	</datasource>
 	<datasource name="idp-response-time">
 		<rrd:rrd xmlns:rrd="be:e-contract:jwatchdog:datasource:rrd:1.0"
-			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/curl-eid-idp/response_time.rrd"
-			dataSourceName="value" />
+			file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/curl-eid-idp/response_time.rrd" />
 	</datasource>
 	<notifier name="spryng">
 		<spryng:spryng xmlns:spryng="be:e-contract:jwatchdog:notifier:spryng:1.0"
