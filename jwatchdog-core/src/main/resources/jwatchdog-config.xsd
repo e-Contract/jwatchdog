@@ -31,20 +31,28 @@
 				</documentation>
 			</annotation>
 		</attribute>
+		<attribute name="loop" type="xs:boolean" default="true">
+			<annotation>
+				<documentation>
+					Sets whether jWatchdog should loop or not. Default
+					value is "true".
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 	<complexType name="datasource-type">
 		<sequence>
 			<any />
 		</sequence>
-		<attribute name="name" type="xs:ID" />
+		<attribute name="name" type="xs:ID" use="required" />
 	</complexType>
 
 	<complexType name="notifier-type">
 		<sequence>
 			<any />
 		</sequence>
-		<attribute name="name" type="xs:ID" />
+		<attribute name="name" type="xs:ID" use="required" />
 	</complexType>
 
 	<complexType name="notifier-group-type">
@@ -52,11 +60,11 @@
 			<element name="notifier" type="tns:notifier-group-element"
 				maxOccurs="unbounded" />
 		</sequence>
-		<attribute name="name" type="xs:ID" />
+		<attribute name="name" type="xs:ID" use="required" />
 	</complexType>
 
 	<complexType name="notifier-group-element">
-		<attribute name="name" type="xs:string" />
+		<attribute name="name" type="xs:string" use="required" />
 	</complexType>
 
 	<complexType name="trigger-type">
@@ -94,17 +102,17 @@
 	</complexType>
 
 	<complexType name="above-type">
-		<attribute name="value" type="xs:double" />
+		<attribute name="value" type="xs:double" use="required" />
 	</complexType>
 
 	<complexType name="below-type">
-		<attribute name="value" type="xs:double" />
+		<attribute name="value" type="xs:double" use="required" />
 	</complexType>
 
 	<complexType name="script-type">
 		<simpleContent>
 			<extension base="xs:string">
-				<attribute name="type" type="xs:string" />
+				<attribute name="type" type="xs:string" use="required" />
 				<attribute name="allowMultipleNotifications" type="xs:boolean"
 					default="false" />
 			</extension>
