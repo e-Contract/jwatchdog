@@ -10,6 +10,25 @@
 
 	<name>Java Watchdog Project</name>
 
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>LICENSE.txt</url>
+		</license>
+	</licenses>
+	<organization>
+		<name>e-Contract.be</name>
+		<url>https://www.e-contract.be</url>
+	</organization>
+	<url>http://code.google.com/p/jwatchdog/</url>
+	<developers>
+		<developer>
+			<id>fcorneli</id>
+			<name>Frank Cornelis</name>
+			<email>info@e-contract.be</email>
+		</developer>
+	</developers>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -90,12 +109,12 @@
 		<tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
-                <repository>
-                        <id>e-contract-deploy</id>
-                        <url>scp://e-contract.be/maven2</url>
-                        <uniqueVersion>false</uniqueVersion>
-                </repository>
-        </distributionManagement>
+		<repository>
+			<id>e-contract-deploy</id>
+			<url>scp://e-contract.be/maven2</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
