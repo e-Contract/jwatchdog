@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
-	sleep="1">
+	sleep="1" loop="false">
 	<datasource name="static">
 		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
 			<static:value>1.0</static:value>
@@ -12,7 +12,7 @@
 		<script:script xmlns:script="be:e-contract:jwatchdog:notifier:script:1.0"
 			type="text/python">
 			<![CDATA[
-print "python says: " + message
+print "python says: " + jwatchdog.message
 			]]>
 		</script:script>
 	</notifier>

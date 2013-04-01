@@ -7,6 +7,15 @@
 	<element name="script" type="tns:script-type" />
 
 	<complexType name="script-type">
+		<annotation>
+			<documentation>
+				A "jwatchdog" object is being injected. This
+				"jwatchdog" object contains the following fields:
+
+				"datasource". On
+				the datasource you can do getMinutes() and setValues(...).
+			</documentation>
+		</annotation>
 		<simpleContent>
 			<extension base="xs:string">
 				<attribute name="type" type="xs:string" />

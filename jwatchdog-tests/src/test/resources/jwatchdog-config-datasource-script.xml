@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
-	sleep="1">
+	sleep="1" loop="false">
 	<datasource name="script">
 		<script:script xmlns:script="be:e-contract:jwatchdog:datasource:script:1.0"
 			type="text/javascript">
 			<![CDATA[
-				println("minutes: " + datasource.getMinutes());
-				datasource.setValues([1.0, 3.0]);
-				datasource.values = [1.0, 2.0, 2.1, 4.0];
+				println("minutes: " + jwatchdog.datasource.getMinutes());
+				jwatchdog.datasource.setValues([1.0, 3.0]);
+				jwatchdog.datasource.values = [1.0, 2.0, 2.1, 4.0];
 			]]>
 		</script:script>
 	</datasource>

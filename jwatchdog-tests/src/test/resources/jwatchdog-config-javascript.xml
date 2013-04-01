@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
-	sleep="1">
+	sleep="1" loop="false">
 	<datasource name="static">
 		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
 			<static:value>1.0</static:value>
@@ -17,10 +17,10 @@
 			<script type="text/javascript">
 				<![CDATA[
 					println("hello world from javascript");
-					for (idx = 0; idx < values.length; idx++) {
-						println("value: " + values[idx]);
+					for (idx = 0; idx < jwatchdog.values.length; idx++) {
+						println("value: " + jwatchdog.values[idx]);
 					}
-					notifier.notify("notification message");
+					jwatchdog.notifier.notify("notification message");
 				]]>
 			</script>
 		</condition>
