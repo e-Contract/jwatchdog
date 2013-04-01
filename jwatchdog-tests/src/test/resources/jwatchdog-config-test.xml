@@ -10,7 +10,7 @@
 		<twilio:twilio xmlns:twilio="be:e-contract:jwatchdog:notifier:twilio:1.0"
 			account="1234" token="5678" from="+32478299492" to="+32478299492" />
 	</notifier>
-	<trigger description="Load to high" datasource="load-shortterm"
+	<trigger description="Load too high" datasource="load-shortterm"
 		notifier="twilio">
 		<condition>
 			<above value="1.0" />
