@@ -7,6 +7,13 @@
 	<element name="spryng" type="tns:spryng-type" />
 
 	<complexType name="spryng-type">
+		<annotation>
+			<documentation>
+				Spryng based SMS notifier.
+
+				See also: http://www.spryng.be/
+			</documentation>
+		</annotation>
 		<attribute name="username" type="xs:string" />
 		<attribute name="password" type="xs:string" />
 		<attribute name="destination" type="xs:string" />

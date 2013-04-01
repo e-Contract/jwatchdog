@@ -7,10 +7,18 @@
 	<element name="twilio" type="tns:twilio-type" />
 
 	<complexType name="twilio-type">
+		<annotation>
+			<documentation>
+				Twilio based SMS notifier.
+
+				See also:
+				https://www.twilio.com/
+			</documentation>
+		</annotation>
 		<attribute name="account" type="xs:string" />
 		<attribute name="token" type="xs:string" />
-		<attribute name="from" type="xs:string"/>
-		<attribute name="to" type="xs:string"/>
+		<attribute name="from" type="xs:string" />
+		<attribute name="to" type="xs:string" />
 	</complexType>
 
 </schema>

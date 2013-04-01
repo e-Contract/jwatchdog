@@ -8,7 +8,14 @@
 	<complexType name="mail-type">
 		<attribute name="from" type="xs:string" />
 		<attribute name="to" type="xs:string" />
-		<attribute name="smtpServer" type="xs:string" />
+		<attribute name="smtpServer" type="xs:string">
+			<annotation>
+				<documentation>
+					The location of the SMTP server used to send email
+					notifications.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 </schema>

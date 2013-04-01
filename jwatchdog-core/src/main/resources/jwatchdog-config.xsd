@@ -56,6 +56,12 @@
 	</complexType>
 
 	<complexType name="notifier-group-type">
+		<annotation>
+			<documentation>
+				All notifiers within a notifier group receive the
+				notifications.
+			</documentation>
+		</annotation>
 		<sequence>
 			<element name="notifier" type="tns:notifier-group-element"
 				maxOccurs="unbounded" />
