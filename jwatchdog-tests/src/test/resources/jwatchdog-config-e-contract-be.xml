@@ -70,31 +70,31 @@
 	<trigger description="Root disk space to low" datasource="root"
 		notifier="group">
 		<condition>
-			<below value="10737418240" />
+			<below value="10 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="Home disk space to low" datasource="home"
 		notifier="group">
 		<condition>
-			<below value="10737418240" />
+			<below value="10 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="Used memory to high" datasource="memory-used"
 		notifier="group">
 		<condition>
-			<above value="16106127360" />
+			<above value="15 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="JBoss used memory to high" datasource="jboss-memory-used"
 		notifier="group">
 		<condition>
-			<above value="1610612736" />
+			<above value="1.5 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="JBoss used perm gen memory to high"
 		datasource="jboss-perm-memory-used" notifier="group">
 		<condition>
-			<above value="419430400" />
+			<above value="400 MiB" />
 		</condition>
 	</trigger>
 	<trigger description="JBoss open files to high" datasource="jboss-files"

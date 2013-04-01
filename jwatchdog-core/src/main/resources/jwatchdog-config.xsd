@@ -102,11 +102,25 @@
 	</complexType>
 
 	<complexType name="above-type">
-		<attribute name="value" type="xs:double" use="required" />
+		<attribute name="value" type="xs:string" use="required">
+			<annotation>
+				<documentation>
+					Is a double, with optional suffix "KiB", "MiB", or
+					"GiB".
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 	<complexType name="below-type">
-		<attribute name="value" type="xs:double" use="required" />
+		<attribute name="value" type="xs:string" use="required">
+			<annotation>
+				<documentation>
+					Is a double, with optional suffix "KiB", "MiB", or
+					"GiB".
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 	<complexType name="script-type">

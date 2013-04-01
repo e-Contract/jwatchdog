@@ -112,6 +112,7 @@ public class Main {
 			Map<String, Datasource> datasources,
 			Map<String, Set<Notifier>> notifiers,
 			List<TriggerType> triggerConfigs, String notificationPrefix) {
+		Expression expression = new Expression();
 		for (TriggerType triggerConfig : triggerConfigs) {
 			LOG.debug("trigger: " + triggerConfig.getDescription());
 			if (triggerConfig.isSkip()) {
@@ -136,11 +137,12 @@ public class Main {
 			ConditionType condition = triggerConfig.getCondition();
 			AboveType above = condition.getAbove();
 			if (null != above) {
-				Double triggerValue = above.getValue();
+				String triggerValue = above.getValue();
 				LOG.debug("\tcondition: above " + triggerValue);
 				for (double value : values) {
 					LOG.debug("\tvalue: " + value);
-					if (value > triggerValue) {
+					double evalTriggerValue = expression.eval(triggerValue);
+					if (value > evalTriggerValue) {
 						String message;
 						if (notificationPrefix != null) {
 							message = notificationPrefix
@@ -157,11 +159,12 @@ public class Main {
 			}
 			BelowType below = condition.getBelow();
 			if (null != below) {
-				Double triggerValue = below.getValue();
+				String triggerValue = below.getValue();
 				LOG.debug("\tcondition: below " + triggerValue);
+				double evalTriggerValue = expression.eval(triggerValue);
 				for (double value : values) {
 					LOG.debug("\tvalue: " + value);
-					if (value < triggerValue) {
+					if (value < evalTriggerValue) {
 						String message;
 						if (notificationPrefix != null) {
 							message = notificationPrefix
