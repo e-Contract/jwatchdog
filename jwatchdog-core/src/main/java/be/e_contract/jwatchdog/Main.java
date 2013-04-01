@@ -95,6 +95,10 @@ public class Main {
 			List<TriggerType> triggerConfigs, String notificationPrefix) {
 		for (TriggerType triggerConfig : triggerConfigs) {
 			LOG.debug("trigger: " + triggerConfig.getDescription());
+			if (triggerConfig.isSkip()) {
+				LOG.debug("skipping trigger");
+				continue;
+			}
 			LOG.debug("\tdatasource: " + triggerConfig.getDatasource());
 			LOG.debug("\tnotifier: " + triggerConfig.getNotifier());
 			String datasourceName = triggerConfig.getDatasource();
