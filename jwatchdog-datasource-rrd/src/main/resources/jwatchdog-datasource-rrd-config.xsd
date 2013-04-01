@@ -6,11 +6,19 @@
 	<element name="rrd" type="tns:rrd-type" />
 
 	<complexType name="rrd-type">
-		<attribute name="file" type="xs:string" />
+		<attribute name="file" type="xs:string" use="required">
+			<annotation>
+				<documentation>
+					The location of the RRD file.
+				</documentation>
+			</annotation>
+		</attribute>
 		<attribute name="dataSourceName" type="xs:string">
 			<annotation>
 				<documentation>
-					The name of the data source within the RRD file.
+					The name of the data source within the RRD file. If
+					not provided, the first data source within the RRD file will be
+					used.
 				</documentation>
 			</annotation>
 		</attribute>
