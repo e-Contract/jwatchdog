@@ -58,6 +58,17 @@ public class MainTest {
 	}
 
 	@Test
+	public void testExpression() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-expression.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testUnknownDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-unknown-datasource.xml");
