@@ -127,17 +127,17 @@
 					}
 					
 					function main() {
-						for (idx = 0; idx < values.length; idx++) {
-							if (values[idx] > 2.0) {
-								notifier.notify("eID IdP response time to high (peek)");
+						for (idx = 0; idx < jwatchdog.values.length; idx++) {
+							if (jwatchdog.values[idx] > 2.0) {
+								jwatchdog.notifier.notify("eID IdP response time to high (peek)");
 								return;
 							}
 	 					}
 						
-						var avgValues = movingAverage(values, 5);
+						var avgValues = movingAverage(jwatchdog.values, 5);
 						for (idx = 0; idx < avgValues.length; idx++) {
 							if (avgValues[idx] > 1.0) {
-								notifier.notify("eID IdP response time to high (avg)");	
+								jwatchdog.notifier.notify("eID IdP response time to high (avg)");	
 								return;
 							}
 						}

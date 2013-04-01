@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
-	sleep="1">
+	sleep="1" loop="false">
 	<datasource name="static">
 		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
 			<static:value>1.0</static:value>
@@ -33,15 +33,15 @@
 					}
 					
 					function main() {
-						var avgValues = movingAverage(values, 5);
+						var avgValues = movingAverage(jwatchdog.values, 5);
 						for (idx = 0; idx < avgValues.length; idx++) {
 							println("value: " + avgValues[idx]);
 							if (avgValues[idx] > 2.0) {
-								notifier.notify("alert");
+								jwatchdog.notifier.notify("alert");
 								//return;
 							}
 						}
-						notifier.notify("notification message");
+						jwatchdog.notifier.notify("notification message");
 					}
 					
 					main();

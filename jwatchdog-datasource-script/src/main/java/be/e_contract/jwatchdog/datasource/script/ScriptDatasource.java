@@ -54,7 +54,8 @@ public class ScriptDatasource implements Datasource {
 			return new double[] {};
 		}
 		this.minutes = minutes;
-		scriptEngine.put("datasource", this);
+		ScriptObject scriptObject = new ScriptObject(this);
+		scriptEngine.put("jwatchdog", scriptObject);
 		try {
 			scriptEngine.eval(this.script);
 		} catch (ScriptException e) {

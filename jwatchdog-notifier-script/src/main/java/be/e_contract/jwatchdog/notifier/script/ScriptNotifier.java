@@ -49,7 +49,8 @@ public class ScriptNotifier implements Notifier {
 			LOG.error("unsupported script language: " + this.mimeType);
 			return;
 		}
-		scriptEngine.put("message", message);
+		ScriptObject scriptObject = new ScriptObject(message);
+		scriptEngine.put("jwatchdog", scriptObject);
 		try {
 			scriptEngine.eval(this.script);
 		} catch (ScriptException e) {

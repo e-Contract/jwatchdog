@@ -124,6 +124,17 @@
 	</complexType>
 
 	<complexType name="script-type">
+		<annotation>
+			<documentation>
+				A "jwatchdog" object is being injected. This
+				"jwatchdog" object contains the following fields:
+
+				"values" as an
+				array of doubles
+
+				"notifier"
+			</documentation>
+		</annotation>
 		<simpleContent>
 			<extension base="xs:string">
 				<attribute name="type" type="xs:string" use="required" />

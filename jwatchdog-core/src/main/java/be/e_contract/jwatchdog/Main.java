@@ -192,9 +192,10 @@ public class Main {
 					LOG.error("unsupported script language: " + mimeType);
 					continue;
 				}
-				scriptEngine.put("values", values);
-				scriptEngine.put("notifier", new ScriptNotifier(notifierSet,
-						notificationPrefix, allowMultipleNotifications));
+				ScriptObject scriptObject = new ScriptObject(values,
+						new ScriptNotifier(notifierSet, notificationPrefix,
+								allowMultipleNotifications));
+				scriptEngine.put("jwatchdog", scriptObject);
 				try {
 					scriptEngine.eval(script.getValue());
 				} catch (ScriptException e) {
