@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
@@ -60,6 +61,18 @@ public class Main {
 		if (!configFile.exists()) {
 			return;
 		}
+
+		LOG.debug("supported scripting languages:");
+		ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+		List<ScriptEngineFactory> scriptEngineFactories = scriptEngineManager
+				.getEngineFactories();
+		for (ScriptEngineFactory scriptEngineFactory : scriptEngineFactories) {
+			LOG.debug("\tscript language: "
+					+ scriptEngineFactory.getLanguageName());
+			List<String> mimetypes = scriptEngineFactory.getMimeTypes();
+			LOG.debug("\tmimetypes: " + mimetypes);
+		}
+
 		Config config = new Config(configFile.toURI().toURL());
 		boolean loop = true;
 		while (loop) {
