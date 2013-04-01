@@ -63,9 +63,26 @@
 		<sequence>
 			<element name="condition" type="tns:condition-type" />
 		</sequence>
-		<attribute name="description" type="xs:string" />
-		<attribute name="datasource" type="xs:string" />
-		<attribute name="notifier" type="xs:string" />
+		<attribute name="description" type="xs:string" use="required">
+			<annotation>
+				<documentation>
+					The description what this trigger is all about. This
+					description is used towards the notifier in case the condition is
+					met.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="datasource" type="xs:string" use="required" />
+		<attribute name="notifier" type="xs:string" use="required" />
+		<attribute name="skip" type="xs:boolean" default="false">
+			<annotation>
+				<documentation>
+					Use the optional skip="true" to skip the evaluation
+					of this trigger. Can be used to temporary disable a trigger that
+					noises to much.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 	<complexType name="condition-type">
