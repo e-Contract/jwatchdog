@@ -21,20 +21,40 @@ package be.e_contract.jwatchdog.notifier.console;
 import java.util.Collections;
 import java.util.Set;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.dom.DOMSource;
+
 import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.notifier.Notifier;
 import be.e_contract.jwatchdog.notifier.NotifierProvider;
+import be.e_contract.jwatchdog.notifier.console.jaxb.config.ObjectFactory;
 
 public class ConsoleNotifierProvider implements NotifierProvider {
 
+	private final Unmarshaller unmarshaller;
+
+	public ConsoleNotifierProvider() {
+		try {
+			JAXBContext jaxbContext = JAXBContext
+					.newInstance(ObjectFactory.class);
+			this.unmarshaller = jaxbContext.createUnmarshaller();
+		} catch (JAXBException e) {
+			throw new RuntimeException("JAXB error: " + e.getMessage());
+		}
+	}
+
 	@Override
 	public Set<String> getConfigNamespaces() {
-		return Collections.singleton("urn:be:e-contract:jwatchdog:notifier:console:1.0");
+		return Collections
+				.singleton("urn:be:e-contract:jwatchdog:notifier:console:1.0");
 	}
 
 	@Override
 	public Notifier loadNotifier(Element configElement) throws Exception {
+		this.unmarshaller.unmarshal(new DOMSource(configElement));
 		return new ConsoleNotifier();
 	}
 }

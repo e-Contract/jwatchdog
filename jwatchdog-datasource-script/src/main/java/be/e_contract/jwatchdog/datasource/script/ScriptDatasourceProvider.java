@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.DatasourceProvider;
-import be.e_contract.jwatchdog.datasource.script._1.ObjectFactory;
-import be.e_contract.jwatchdog.datasource.script._1.ScriptType;
+import be.e_contract.jwatchdog.datasource.script.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.datasource.script.jaxb.config.ScriptType;
 
 public class ScriptDatasourceProvider implements DatasourceProvider {
 

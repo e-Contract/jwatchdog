@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.notifier.Notifier;
 import be.e_contract.jwatchdog.notifier.NotifierProvider;
-import be.e_contract.jwatchdog.notifier.spryng._1.ObjectFactory;
-import be.e_contract.jwatchdog.notifier.spryng._1.SpryngType;
+import be.e_contract.jwatchdog.notifier.spryng.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.notifier.spryng.jaxb.config.SpryngType;
 
 public class SpryngNotifierProvider implements NotifierProvider {
 

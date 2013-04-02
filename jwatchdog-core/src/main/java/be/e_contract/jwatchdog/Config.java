@@ -28,8 +28,8 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.e_contract.jwatchdog._1.JwatchdogConfigType;
-import be.e_contract.jwatchdog._1.ObjectFactory;
+import be.e_contract.jwatchdog.jaxb.config.JwatchdogConfigType;
+import be.e_contract.jwatchdog.jaxb.config.ObjectFactory;
 
 public class Config {
 

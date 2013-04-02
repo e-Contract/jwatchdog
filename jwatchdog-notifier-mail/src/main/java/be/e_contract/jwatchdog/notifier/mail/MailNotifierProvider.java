@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.notifier.Notifier;
 import be.e_contract.jwatchdog.notifier.NotifierProvider;
-import be.e_contract.jwatchdog.notifier.mail._1.MailType;
-import be.e_contract.jwatchdog.notifier.mail._1.ObjectFactory;
+import be.e_contract.jwatchdog.notifier.mail.jaxb.config.MailType;
+import be.e_contract.jwatchdog.notifier.mail.jaxb.config.ObjectFactory;
 
 public class MailNotifierProvider implements NotifierProvider {
 

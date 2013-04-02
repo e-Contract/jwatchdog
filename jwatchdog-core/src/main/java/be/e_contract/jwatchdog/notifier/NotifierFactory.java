@@ -30,9 +30,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import be.e_contract.jwatchdog._1.NotifierGroupElement;
-import be.e_contract.jwatchdog._1.NotifierGroupType;
-import be.e_contract.jwatchdog._1.NotifierType;
+import be.e_contract.jwatchdog.jaxb.config.NotifierGroupElement;
+import be.e_contract.jwatchdog.jaxb.config.NotifierGroupType;
+import be.e_contract.jwatchdog.jaxb.config.NotifierType;
 
 /**
  * The factory for notifiers.

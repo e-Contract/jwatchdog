@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.DatasourceProvider;
-import be.e_contract.jwatchdog.datasource._static._1.ObjectFactory;
-import be.e_contract.jwatchdog.datasource._static._1.StaticType;
+import be.e_contract.jwatchdog.datasource.statik.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.datasource.statik.jaxb.config.StaticType;
 
 public class StaticDatasourceProvider implements DatasourceProvider {
 
