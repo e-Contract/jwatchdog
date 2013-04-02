@@ -1,0 +1,17 @@
+Introduction
+
+  The console notifier plugin provides a simple console based notifier.
+
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="console">
+	<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-console-config.xsd}jWatchdog Console Notifier XML Schema}}

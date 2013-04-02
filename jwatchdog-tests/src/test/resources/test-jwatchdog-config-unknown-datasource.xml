@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
 	sleep="1">
 	<notifier name="console">
-		<console:console xmlns:console="be:e-contract:jwatchdog:notifier:console:1.0" />
+		<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
 	</notifier>
 	<trigger description="Hello world" datasource="foobar"
 		notifier="console">

@@ -56,7 +56,7 @@ public class RRDDatasourceProvider implements DatasourceProvider {
 	@Override
 	public Set<String> getConfigNamespaces() {
 		return Collections
-				.singleton("be:e-contract:jwatchdog:datasource:rrd:1.0");
+				.singleton("urn:be:e-contract:jwatchdog:datasource:rrd:1.0");
 	}
 
 	@Override

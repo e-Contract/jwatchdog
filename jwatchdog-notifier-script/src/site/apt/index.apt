@@ -1,0 +1,33 @@
+Introduction
+
+  The script notifier plugin provides script based notifiers.
+  
+  The scripting language can be Javascript, Ruby, or Groovy.
+
+Usage
+
+  The framework injects an object named <<<jwatchdog>>>.
+  Via the fields on this object you can communicate with the framework.
+  The available fields on the <<<jwatchdog>>> object are:
+
+*------------+------------+
+| message | The message to be used for sending notifications. |
+*------------+------------+
+| log        | a Commons Logging instance |
+*------------+------------+
+
+  Example configuration:
+
++--
+<notifier name="script">
+	<script:script xmlns:script="urn:be:e-contract:jwatchdog:notifier:script:1.0"
+		type="text/javascript">
+		jwatchdog.log.debug("javascript debug logging");
+		println("javascript says: " + jwatchdog.message);
+	</script:script>
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-script-config.xsd}jWatchdog Script Notifier XML Schema}}

@@ -1,0 +1,25 @@
+Introduction
+
+  The RRD datasource plugin provides RRD based datasources.
+  
+  RRD files can be generated using {{{http://oss.oetiker.ch/rrdtool/}RRDTool}}.
+  
+  Most of the time you will use {{{http://collectd.org/}Collectd}} to produce RRD files out of various sources.
+
+Usage
+
++--
+<datasource name="load-shortterm">
+	<rrd:rrd xmlns:rrd="urn:be:e-contract:jwatchdog:datasource:rrd:1.0"
+		file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd"
+		dataSourceName="shortterm" />
+</datasource>
+<datasource name="root-free">
+	<rrd:rrd xmlns:rrd="urn:be:e-contract:jwatchdog:datasource:rrd:1.0"
+		file="/opt/collectd/var/lib/collectd/rrd/e-contract.be/df-root/df_complex-free.rrd" />
+</datasource>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-datasource-rrd-config.xsd}jWatchdog RRD datasource Schema}}

@@ -1,0 +1,21 @@
+Introduction
+
+  The Spryng notifier plugin provides an SMS notifier using {{{http://www.spryng.nl/}Spryng SMS gateway}}.
+
+  This plugin can be used to keep you awake at night.
+  
+Usage:
+
+  Example configuration:
+  
++--
+<notifier name="spryng">
+	<spryng:spryng xmlns:spryng="urn:be:e-contract:jwatchdog:notifier:spryng:1.0"
+		username="replace_with_username" password="replace_with_password"
+		destination="32478299492" sender="32478299492" route="BUSINESS" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-spryng-config.xsd}jWatchdog Spryng Notifier XML Schema}}

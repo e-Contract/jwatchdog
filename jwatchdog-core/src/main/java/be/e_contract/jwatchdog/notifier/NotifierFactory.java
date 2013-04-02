@@ -34,6 +34,12 @@ import be.e_contract.jwatchdog._1.NotifierGroupElement;
 import be.e_contract.jwatchdog._1.NotifierGroupType;
 import be.e_contract.jwatchdog._1.NotifierType;
 
+/**
+ * The factory for notifiers.
+ * 
+ * @author Frank Cornelis
+ * 
+ */
 public class NotifierFactory {
 
 	private static final Log LOG = LogFactory.getLog(NotifierFactory.class);

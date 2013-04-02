@@ -1,0 +1,37 @@
+Introduction
+
+  The script datasource plugin provides script based datasources.
+  
+  The scripting language can be Javascript, Ruby, or Groovy.
+  
+Usage
+
+  The framework injects an object named <<<jwatchdog>>>.
+  Via the fields on this object you can communicate with the framework.
+  The available fields on the <<<jwatchdog>>> object are:
+
+*------------+------------+
+| datasource | The datasource object to be populated via .setValues(...) or .values = ... |
+*------------+------------+
+| log        | a Commons Logging instance |
+*------------+------------+
+
+  Example configuration:
+
++--
+<datasource name="script">
+	<script:script xmlns:script="urn:be:e-contract:jwatchdog:datasource:script:1.0"
+		type="text/javascript">
+		<![CDATA[
+			jwatchdog.log.debug("javascript debug logging");
+			println("minutes: " + jwatchdog.datasource.getMinutes());
+			jwatchdog.datasource.setValues([1.0, 3.0]);
+			jwatchdog.datasource.values = [1.0, 2.0, 2.1, 4.0];
+		]]>
+	</script:script>
+</datasource>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-datasource-script-config.xsd}jWatchdog Script datasource plugin Schema}}

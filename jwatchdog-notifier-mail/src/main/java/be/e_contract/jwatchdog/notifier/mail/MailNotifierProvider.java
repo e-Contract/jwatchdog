@@ -51,7 +51,7 @@ public class MailNotifierProvider implements NotifierProvider {
 	@Override
 	public Set<String> getConfigNamespaces() {
 		return Collections
-				.singleton("be:e-contract:jwatchdog:notifier:mail:1.0");
+				.singleton("urn:be:e-contract:jwatchdog:notifier:mail:1.0");
 	}
 
 	@Override

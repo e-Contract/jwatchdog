@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema version="1.0" xmlns="http://www.w3.org/2001/XMLSchema"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	targetNamespace="be:e-contract:jwatchdog:datasource:static:1.0"
-	xmlns:tns="be:e-contract:jwatchdog:datasource:static:1.0">
+	targetNamespace="urn:be:e-contract:jwatchdog:datasource:static:1.0"
+	xmlns:tns="urn:be:e-contract:jwatchdog:datasource:static:1.0">
 
 	<element name="static" type="tns:static-type" />
 

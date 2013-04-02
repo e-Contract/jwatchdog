@@ -18,7 +18,19 @@
 
 package be.e_contract.jwatchdog.notifier;
 
+/**
+ * Interface for notifier.
+ * 
+ * @author Frank Cornelis
+ * 
+ */
 public interface Notifier {
 
+	/**
+	 * Sends out a notification message.
+	 * 
+	 * @param message
+	 *            the notification message.
+	 */
 	void notify(String message);
 }

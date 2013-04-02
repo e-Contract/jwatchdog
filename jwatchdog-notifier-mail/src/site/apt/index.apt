@@ -1,0 +1,20 @@
+Introduction
+
+  The mail notifier plugin provides an email based notifier implementation.
+
+  This notifier can be used to send email notifications.
+  
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="mail">
+	<mail:mail xmlns:mail="urn:be:e-contract:jwatchdog:notifier:mail:1.0"
+		smtpServer="localhost" from="jwatchdog-noreply@e-contract.be" to="info@e-contract.be" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-mail-config.xsd}jWatchdog Mail Notifier XML Schema}}

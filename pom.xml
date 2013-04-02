@@ -28,6 +28,9 @@
 			<email>info@e-contract.be</email>
 		</developer>
 	</developers>
+	<issueManagement>
+		<url>http://code.google.com/p/jwatchdog/issues/list</url>
+	</issueManagement>
 
 	<build>
 		<pluginManagement>
@@ -91,6 +94,26 @@
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.7</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -101,7 +124,18 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.4</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<scm>
@@ -114,6 +148,10 @@
 			<url>scp://e-contract.be/maven2</url>
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
+		<site>
+			<id>e-contract-site</id>
+			<url>scp://e-contract.be/sites/jwatchdog/</url>
+		</site>
 	</distributionManagement>
 
 	<dependencyManagement>

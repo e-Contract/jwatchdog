@@ -1,0 +1,198 @@
+Introduction
+
+  The jWatchdog project delivers a simple watchdog to actively monitor your infrastructure and send you notifications in case something goes wrong.
+  
+  jWatchdog is configured using a simple XML configuration file.
+  This configuration file can be changed on-the-fly without a need to restart the watchdog.
+  
+  jWatchdog does not offer data collection itself.
+  It assumes that you already collected the data on which you want to run jWatchdog.
+  We advise to use the facto standard tool {{{http://collectd.org/}Collectd}} for data collection.
+  We assume that you use the RRDTool collectd output plugin to store the collected data in RRD files. 
+
+Download
+
+  The jWatchdog distribution can be downloaded from {{{http://code.google.com/p/jwatchdog/downloads/list}Google Code}}.
+
+Usage
+
+  The jWatchdog tool is delived as a command line tool including all required dependencies.
+  Start the tool via:
+  
++--
+java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
++--
+
+  The basic configuration file looks as follows:
+  
++--
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="10">
+	...
+</jwatchdog-config>
++--
+
+  Via the <<<sleep>>> attribute you specify the interval at which jWatchdog will run.
+  This is expressed in minutes.
+
+  jWatchdog uses the following concepts:
+  
+  * datasources: define the data source from which to receive input data to be analysed
+  
+  * notifiers: define the various entities that should be notified in case a data source value reached a critical point.
+
+  * triggers: define the logic when to notify the notifiers based on the datasource values.
+
+  []
+  
+  We will introduce each of these concepts in the following subsections.
+
+* Datasource
+
+  The basic datasource construct looks as follows:
+  
++--
+<datasource name="unique_data_source_name">
+	...
+</datasource>
++--
+  
+  The basic framework itself does not offer any build-in implementation of a datasource.
+  Instead the framework uses a plugin mechanism to load datasource implementations at run-time.
+  jWatchdog comes with various datasource plugins out of the box.
+  The most interesting plugin is probably the {{{./jwatchdog-datasource-rrd}RRD datasource plugin}}.
+  
+  The available datasource plugins are:
+  
+  * {{{./jwatchdog-datasource-rrd}RRD datasource plugin}}
+  
+  * {{{./jwatchdog-datasource-static}Static datasource plugin}}
+  
+  * {{{./jwatchdog-datasource-script}Script datasource plugin}}
+  
+* Notifier
+
+  Next you need to define the different notifiers you want to use.
+  The basic construct for a notifier looks as follows:
+  
++--
+<notifier name="unique_name_for_notifier">
+	...
+</notifier>
++--
+  
+  Just as with the datasource, jWatchdog offers a plugin mechanism to load implementations of notifiers at run-time.
+  The most interesting notifier is probably the {{{./jwatchdog-notifier-mail}Mail notifier}}.
+  
+  The available notifier plugins are:
+  
+  * {{{./jwatchdog-notifier-mail}Mail notifier plugin}}
+  
+  * {{{./jwatchdog-notifier-console}Console notifier plugin}}
+  
+  * {{{./jwatchdog-notifier-script}Script notifier plugin}}
+  
+  * {{{./jwatchdog-notifier-spryng}Spryng notifier plugin}}
+  
+  * {{{./jwatchdog-notifier-twilio}Twilio notifier plugin}}
+  
+* Trigger
+
+  Now that we defined our datasources and notifiers, it is time to express our trigger conditions.
+  The basic construct for a trigger looks as follows:
+  
++--
+<trigger description="The notification message" datasource="the_data_source_name"
+	notifier="the_notifier_name">
+	<condition>
+		...
+	</condition>
+</trigger>
++--
+
+  So a <<<trigger>>> operates on a certain <<<datasource>>> and will notify the <<<notifier>>> with a certain <<<description>>> message in case one of the given conditions is met.
+  A condition can be any of the following (even combined):
+
+** Above
+
+  Example of the above condition:
+  
++--
+<condition>
+	<above value="1234.5"/>
+</condition>
++--
+
+  In this example the notifier will receive some message in case the datasource values goes above 1234.5.
+  The <<<value>>> attribute of the <<<above>>> condition is of type double, but can be suffixed with KiB, MiB, or GiB.
+  So you could for example have:
+  
++--
+<condition>
+	<above value="5 GiB"/>
+</condition>
++--
+
+** Below
+
+  Example of the below condition:
+  
++--
+<condition>
+	<below value="1234.5"/>
+</condition>
++--
+
+  Pretty obvious how it behaves.
+
+** Script
+
+  Now, we could of course define an XML construct for every possible technical data analysis function.
+  But we did not.
+  We assume that once you want to go beyond the <<<above>>> and <<<below>>> conditions, we need to give you maximum expressiveness.
+  Hence the final possible condition is simply a <<<script>>>.
+  
+  Example of the script condition:
+  
++--
+<condition>
+	<script type="text/javascript">
+		<![CDATA[
+			jwatchdog.log.debug("javascript debug logging: " + jwatchdog.description);
+			println("hello world from javascript");
+			for (idx = 0; idx < jwatchdog.values.length; idx++) {
+				println("value: " + jwatchdog.values[idx]);
+			}
+			jwatchdog.notifier.notify("notification message");
+		]]>
+	</script>
+</condition>
++--
+
+  To prevent you from having to learn yet-another-scripting-language, we use a similar plugin mechanism for supporting various well known scripting languages.
+  jWatchdog out-of-the-box supports the Javascript, Ruby, and Groovy scripting languages.
+  Via the <<<type>>> attribute you define the scripting language you want to use.
+  The <<<type>>> attribute is simple the official mime type of your preferred scripting language.
+  
+  Of course your script needs to be able to communicate somehow with the jWatchdog framework.
+  To make this possible, the framework injects an object into the scripting environment named <<<jwatchdog>>>.
+  The <<<jwatchdog>>> object has several interesting fields.
+  There is the <<<log>>> field, offering a Commons Logging instance that can be used to debug your scripts.
+  Via the <<<values>>> field you can access the datasource values as an array of doubles.
+  And via the <<<notifier>>> field you can invoke the <<<notify>>> method.
+
+Examples
+
+  Some example configuration files:
+
+  * {{{./jwatchdog-tests/examples/jwatchdog-config-helloworld.xml}jWatchdog helloworld configuration}}
+  
+  * {{{./jwatchdog-tests/examples/jwatchdog-config-e-contract-be.xml}jWatchdog e-Contract.be configuration}}
+  This one is used in production at e-contract.be
+
+XML Schema
+
+  Further documentation about each XML element and attribute is available within the annotated XML schema.
+
+  {{{./jwatchdog-core/schema/jwatchdog-config.xsd}jWatchdog Core XML Schema}}
