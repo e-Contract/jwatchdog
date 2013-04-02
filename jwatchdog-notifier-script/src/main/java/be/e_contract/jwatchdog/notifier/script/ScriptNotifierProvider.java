@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.notifier.Notifier;
 import be.e_contract.jwatchdog.notifier.NotifierProvider;
-import be.e_contract.jwatchdog.notifier.script._1.ObjectFactory;
-import be.e_contract.jwatchdog.notifier.script._1.ScriptType;
+import be.e_contract.jwatchdog.notifier.script.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.notifier.script.jaxb.config.ScriptType;
 
 public class ScriptNotifierProvider implements NotifierProvider {
 

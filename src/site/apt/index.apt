@@ -23,6 +23,8 @@ Usage
 java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
 +--
 
+  The tool will log in the file <<<jwatchdog.log>>>.
+
   The basic configuration file looks as follows:
   
 +--

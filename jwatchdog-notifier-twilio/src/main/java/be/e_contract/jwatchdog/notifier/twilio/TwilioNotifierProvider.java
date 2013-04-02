@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.notifier.Notifier;
 import be.e_contract.jwatchdog.notifier.NotifierProvider;
-import be.e_contract.jwatchdog.notifier.twilio._1.ObjectFactory;
-import be.e_contract.jwatchdog.notifier.twilio._1.TwilioType;
+import be.e_contract.jwatchdog.notifier.twilio.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.notifier.twilio.jaxb.config.TwilioType;
 
 public class TwilioNotifierProvider implements NotifierProvider {
 

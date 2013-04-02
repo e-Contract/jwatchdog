@@ -27,13 +27,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import be.e_contract.jwatchdog._1.DatasourceType;
+import be.e_contract.jwatchdog.jaxb.config.DatasourceType;
 
 /**
  * The factory for datasources.
  * 
  * @author Frank Cornelis
- *
+ * 
  */
 public class DatasourceFactory {
 

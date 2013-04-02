@@ -33,8 +33,8 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.DatasourceProvider;
-import be.e_contract.jwatchdog.datasource.rrd._1.ObjectFactory;
-import be.e_contract.jwatchdog.datasource.rrd._1.RrdType;
+import be.e_contract.jwatchdog.datasource.rrd.jaxb.config.ObjectFactory;
+import be.e_contract.jwatchdog.datasource.rrd.jaxb.config.RrdType;
 
 public class RRDDatasourceProvider implements DatasourceProvider {
 

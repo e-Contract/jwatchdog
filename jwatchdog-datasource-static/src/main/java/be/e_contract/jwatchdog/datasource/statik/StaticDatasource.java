@@ -19,7 +19,7 @@
 package be.e_contract.jwatchdog.datasource.statik;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
-import be.e_contract.jwatchdog.datasource._static._1.StaticType;
+import be.e_contract.jwatchdog.datasource.statik.jaxb.config.StaticType;
 
 public class StaticDatasource implements Datasource {
 
