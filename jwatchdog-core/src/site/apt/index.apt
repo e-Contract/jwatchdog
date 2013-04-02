@@ -1,0 +1,23 @@
+Introduction
+
+  This is the core module of jWatchdog.
+  jWatchdog uses a plugin mechanism for both the datasources and the notifiers.
+  This way jWatchdog can easily be extended.
+  
+Writing a datasource plugin
+
+  A datasource plugin basically needs to implement two interfaces.
+  The <<<Datasource>>> interface and the <<<DatasourceProvider>>> interface.
+
+Writing a notifier plugin
+
+  A notifier plugin basically needs to implement two interfaces.
+  The <<<Notifier>>> interface and the <<<NotifierProvider>>> interface.
+
+API documentation
+
+  {{{./apidocs}Javadoc API documentation}}
+
+XML Schema
+
+  {{{./schema/jwatchdog-config.xsd}jWatchdog Core XML Schema}}

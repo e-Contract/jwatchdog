@@ -29,6 +29,12 @@ import org.w3c.dom.Element;
 
 import be.e_contract.jwatchdog._1.DatasourceType;
 
+/**
+ * The factory for datasources.
+ * 
+ * @author Frank Cornelis
+ *
+ */
 public class DatasourceFactory {
 
 	private static final Log LOG = LogFactory.getLog(DatasourceFactory.class);

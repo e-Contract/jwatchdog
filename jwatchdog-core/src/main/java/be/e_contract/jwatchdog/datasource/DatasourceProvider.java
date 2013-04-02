@@ -23,14 +23,29 @@ import java.util.Set;
 import org.w3c.dom.Element;
 
 /**
- * Interface for a provider of datasources.
+ * Interface for a provider of datasources. Register your datasource provider
+ * implementation via
+ * <code>META-INF/services/be.e_contract.jwatchdog.datasource.DatasourceProvider</code>
  * 
  * @author Frank Cornelis
  * 
  */
 public interface DatasourceProvider {
 
+	/**
+	 * The XML configuration namespaces that this datasource provider is capable
+	 * of handling.
+	 * 
+	 * @return
+	 */
 	Set<String> getConfigNamespaces();
 
+	/**
+	 * Loads a datasource instance given the DOM configuration element.
+	 * 
+	 * @param configElement
+	 * @return
+	 * @throws Exception
+	 */
 	Datasource loadDatasource(Element configElement) throws Exception;
 }

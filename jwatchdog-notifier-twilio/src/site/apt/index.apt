@@ -1,0 +1,20 @@
+Introduction
+
+  The Twilio notifier plugin provides an SMS notifier using {{{http://www.twilio.com/}Twilio}}.
+
+  This plugin can be used to keep you awake at night.
+  
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="twilio">
+	<twilio:twilio xmlns:twilio="urn:be:e-contract:jwatchdog:notifier:twilio:1.0"
+		account="1234" token="5678" from="+32478299492" to="+32478299492" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-twilio-config.xsd}jWatchdog Twilio Notifier XML Schema}}

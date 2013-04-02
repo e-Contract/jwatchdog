@@ -30,7 +30,7 @@ public class ConsoleNotifierProvider implements NotifierProvider {
 
 	@Override
 	public Set<String> getConfigNamespaces() {
-		return Collections.singleton("be:e-contract:jwatchdog:notifier:console:1.0");
+		return Collections.singleton("urn:be:e-contract:jwatchdog:notifier:console:1.0");
 	}
 
 	@Override

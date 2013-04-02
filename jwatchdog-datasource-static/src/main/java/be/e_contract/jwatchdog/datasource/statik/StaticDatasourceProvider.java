@@ -50,7 +50,7 @@ public class StaticDatasourceProvider implements DatasourceProvider {
 
 	@Override
 	public Set<String> getConfigNamespaces() {
-		return Collections.singleton("be:e-contract:jwatchdog:datasource:static:1.0");
+		return Collections.singleton("urn:be:e-contract:jwatchdog:datasource:static:1.0");
 	}
 
 	@Override

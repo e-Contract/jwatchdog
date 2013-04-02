@@ -1,0 +1,23 @@
+Introduction
+
+  The static datasource plugin provides a datasource using a given list of constants.
+
+  This datasource plugin can come in handy to debug trigger scripts.
+
+Usage
+
+  Example configuration:
+
++--
+<datasource name="static">
+	<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
+		<static:value>1.0</static:value>
+		<static:value>2.0</static:value>
+		<static:value>3.0</static:value>
+	</static:static>
+</datasource>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-datasource-static-config.xsd}jWatchdog Static Datasource XML Schema}}

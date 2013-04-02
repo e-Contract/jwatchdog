@@ -6,5 +6,7 @@ target
 *~
 *.iml
 .idea
+jwatchdog-*/src/site/resources/schema/*.xsd
+jwatchdog-tests/src/site/resources/examples/jwatchdog-config-*.xml
 
 syntax: regexp

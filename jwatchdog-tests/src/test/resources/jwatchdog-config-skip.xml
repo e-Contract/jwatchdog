@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jwatchdog-config xmlns="be:e-contract:jwatchdog:1.0"
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
 	sleep="1" loop="false">
 	<datasource name="static">
-		<static:static xmlns:static="be:e-contract:jwatchdog:datasource:static:1.0">
+		<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
 			<static:value>1.0</static:value>
 			<static:value>2.0</static:value>
 			<static:value>3.0</static:value>
 		</static:static>
 	</datasource>
 	<notifier name="console">
-		<console:console xmlns:console="be:e-contract:jwatchdog:notifier:console:1.0" />
+		<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
 	</notifier>
 	<trigger description="Hello world" datasource="static"
 		notifier="console" skip="true">
