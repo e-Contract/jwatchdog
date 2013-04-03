@@ -4,7 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd">
 	<jxb:bindings schemaLocation="jwatchdog-config.xsd" node="/xs:schema">
 		<jxb:schemaBindings>
-			<jxb:package name="be.e_contract.jwatchdog.jaxb.config" />
+			<jxb:package name="be.e_contract.jwatchdog.jaxb.config">
+				<jxb:javadoc><![CDATA[<body>jWatchdog JAXB classes for configuration file.</body>]]></jxb:javadoc>
+			</jxb:package>
 		</jxb:schemaBindings>
 	</jxb:bindings>
 </jxb:bindings>

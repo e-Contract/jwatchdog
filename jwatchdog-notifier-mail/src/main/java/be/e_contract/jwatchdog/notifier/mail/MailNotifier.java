@@ -33,6 +33,7 @@ import javax.mail.internet.MimeMultipart;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.notifier.Notifier;
 
 public class MailNotifier implements Notifier {
@@ -49,6 +50,11 @@ public class MailNotifier implements Notifier {
 		this.smtpServer = smtpServer;
 		this.from = from;
 		this.to = to;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 
 	@Override

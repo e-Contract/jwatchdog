@@ -81,23 +81,25 @@ public class Main {
 			Integer sleepMinutes;
 			if (null != watchdogConfig) {
 				sleepMinutes = watchdogConfig.getSleep();
+				Context context = new WatchdogContext(
+						watchdogConfig.getSettings());
 				if (false == watchdogConfig.isLoop()) {
 					loop = false;
 				}
 				DatasourceFactory datasourceFactory = new DatasourceFactory(
 						watchdogConfig.getDatasource());
 				Map<String, Datasource> datasources = datasourceFactory
-						.loadDatasources();
+						.loadDatasources(context);
 				NotifierFactory notifierFactory = new NotifierFactory(
 						watchdogConfig.getNotifier(),
 						watchdogConfig.getNotifierGroup());
 				Map<String, Set<Notifier>> notifiers = notifierFactory
-						.getNotifiers();
+						.loadNotifiers(context);
 				List<TriggerType> triggerConfigs = watchdogConfig.getTrigger();
 				String notificationPrefix = watchdogConfig
 						.getNotificationPrefix();
 				executeTriggers(sleepMinutes, datasources, notifiers,
-						triggerConfigs, notificationPrefix);
+						triggerConfigs, notificationPrefix, context);
 			} else {
 				sleepMinutes = 10;
 			}
@@ -111,7 +113,8 @@ public class Main {
 	private static void executeTriggers(Integer sleepMinutes,
 			Map<String, Datasource> datasources,
 			Map<String, Set<Notifier>> notifiers,
-			List<TriggerType> triggerConfigs, String notificationPrefix) {
+			List<TriggerType> triggerConfigs, String notificationPrefix,
+			Context context) {
 		Expression expression = new Expression();
 		for (TriggerType triggerConfig : triggerConfigs) {
 			LOG.debug("trigger: " + triggerConfig.getDescription());

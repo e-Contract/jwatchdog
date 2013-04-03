@@ -16,31 +16,7 @@
  * http://www.gnu.org/licenses/.
  */
 
-package be.e_contract.jwatchdog.notifier;
-
-import be.e_contract.jwatchdog.Context;
-
 /**
- * Interface for notifier.
- * 
- * @author Frank Cornelis
- * 
+ * jWatchdog main package.
  */
-public interface Notifier {
-
-	/**
-	 * Initializes the notifier.
-	 * 
-	 * @param context
-	 *            the jWatchdog context.
-	 */
-	void init(Context context);
-
-	/**
-	 * Sends out a notification message.
-	 * 
-	 * @param message
-	 *            the notification message.
-	 */
-	void notify(String message);
-}
+package be.e_contract.jwatchdog;

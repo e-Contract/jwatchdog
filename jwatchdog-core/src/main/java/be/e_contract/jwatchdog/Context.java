@@ -16,35 +16,22 @@
  * http://www.gnu.org/licenses/.
  */
 
-package be.e_contract.jwatchdog.datasource;
-
-import be.e_contract.jwatchdog.Context;
+package be.e_contract.jwatchdog;
 
 /**
- * Interface for a datasource. A datasource provides values over a certain
- * interval in the past.
+ * A watchdog context used by the different datasource and notifier plugins.
  * 
  * @author Frank Cornelis
  * 
  */
-public interface Datasource {
+public interface Context {
 
 	/**
-	 * Initialized the datasource.
+	 * Gives back the proxy configuration for the given protocol. Returns
+	 * <code>null</code> in case the protocol does not require a proxy.
 	 * 
-	 * @param context
-	 *            the jWatchdog context.
-	 */
-	void init(Context context);
-
-	/**
-	 * Gives back the values. The first entry in the array is the most recent
-	 * data point. The last entry in the array is the oldest data point for the
-	 * requested interval.
-	 * 
-	 * @param minutes
-	 *            the number of minutes to go back in time.
+	 * @param protocol
 	 * @return
 	 */
-	double[] getValues(int minutes);
+	ProxyConfig getProxyConfig(String protocol);
 }

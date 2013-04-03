@@ -58,6 +58,17 @@ public class MainTest {
 	}
 
 	@Test
+	public void testWatchdogProxy() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-proxy.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testExpression() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-expression.xml");
@@ -203,6 +214,17 @@ public class MainTest {
 	public void testGraphiteDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-graphite.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
+	public void testNotifierSpryng() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-notifier-spryng.xml");
 		LOG.debug("config URL: " + configUrl);
 		String path = configUrl.toURI().getPath();
 		LOG.debug("path: " + path);

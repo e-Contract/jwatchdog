@@ -18,29 +18,13 @@
 
 package test.integ.be.e_contract.jwatchdog;
 
-import static org.junit.Assert.assertNotNull;
+import be.e_contract.jwatchdog.Context;
+import be.e_contract.jwatchdog.ProxyConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
+public class WatchdogTestContext implements Context {
 
-import be.e_contract.jwatchdog.datasource.graphite.GraphiteDatasource;
-
-public class GraphiteTest {
-
-	private static final Log LOG = LogFactory.getLog(GraphiteTest.class);
-
-	@Test
-	public void testGraphiteREST() throws Exception {
-		GraphiteDatasource graphiteDatasource = new GraphiteDatasource(
-				"http://localhost:8080/render", "system.loadavg_1min");
-
-		graphiteDatasource.init(new WatchdogTestContext());
-		double[] result = graphiteDatasource.getValues(10);
-		assertNotNull(result);
-
-		for (double value : result) {
-			LOG.debug("value: " + value);
-		}
+	@Override
+	public ProxyConfig getProxyConfig(String protocol) {
+		return null;
 	}
 }

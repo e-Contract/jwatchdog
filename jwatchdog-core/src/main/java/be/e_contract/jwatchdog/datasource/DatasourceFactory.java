@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.jaxb.config.DatasourceType;
 
 /**
@@ -48,7 +49,7 @@ public class DatasourceFactory {
 		this.datasourcesConfig = datasourcesConfig;
 	}
 
-	public Map<String, Datasource> loadDatasources() {
+	public Map<String, Datasource> loadDatasources(Context context) {
 		Map<String, Datasource> datasources = new HashMap<String, Datasource>();
 		for (DatasourceType datasourceConfig : this.datasourcesConfig) {
 			String name = datasourceConfig.getName();
@@ -64,6 +65,7 @@ public class DatasourceFactory {
 			try {
 				Datasource datasource = datasourceProvider
 						.loadDatasource(configElement);
+				datasource.init(context);
 				datasources.put(name, datasource);
 			} catch (Exception e) {
 				LOG.error("error loading data source: " + e.getMessage());

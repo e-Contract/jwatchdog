@@ -32,6 +32,7 @@ import org.rrd4j.core.jrrd.DataSource;
 import org.rrd4j.core.jrrd.Header;
 import org.rrd4j.core.jrrd.RRDatabase;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.datasource.Datasource;
 
 public class RRDDatasource implements Datasource {
@@ -105,5 +106,10 @@ public class RRDDatasource implements Datasource {
 			values[data.length - idx - 1] = data[idx][dsIdx];
 		}
 		return values;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 }

@@ -18,6 +18,7 @@
 
 package be.e_contract.jwatchdog.notifier.console;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.notifier.Notifier;
 
 public class ConsoleNotifier implements Notifier {
@@ -25,5 +26,10 @@ public class ConsoleNotifier implements Notifier {
 	@Override
 	public void notify(String message) {
 		System.out.println(message);
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 }

@@ -16,31 +16,31 @@
  * http://www.gnu.org/licenses/.
  */
 
-package be.e_contract.jwatchdog.notifier;
+package be.e_contract.jwatchdog;
 
-import be.e_contract.jwatchdog.Context;
+public class ProxyConfig {
 
-/**
- * Interface for notifier.
- * 
- * @author Frank Cornelis
- * 
- */
-public interface Notifier {
+	private final String protocol;
 
-	/**
-	 * Initializes the notifier.
-	 * 
-	 * @param context
-	 *            the jWatchdog context.
-	 */
-	void init(Context context);
+	private final String host;
 
-	/**
-	 * Sends out a notification message.
-	 * 
-	 * @param message
-	 *            the notification message.
-	 */
-	void notify(String message);
+	private final int port;
+
+	public ProxyConfig(String protocol, String host, int port) {
+		this.protocol = protocol;
+		this.host = host;
+		this.port = port;
+	}
+
+	public String getProtocol() {
+		return this.protocol;
+	}
+
+	public String getHost() {
+		return this.host;
+	}
+
+	public int getPort() {
+		return this.port;
+	}
 }

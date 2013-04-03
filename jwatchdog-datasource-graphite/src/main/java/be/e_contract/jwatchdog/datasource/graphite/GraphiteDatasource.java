@@ -22,18 +22,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import be.e_contract.jwatchdog.Context;
+import be.e_contract.jwatchdog.ProxyConfig;
 import be.e_contract.jwatchdog.datasource.Datasource;
 
 import com.google.gson.Gson;
@@ -46,6 +52,8 @@ public class GraphiteDatasource implements Datasource {
 
 	private final String target;
 
+	private Context context;
+
 	public GraphiteDatasource(String url, String target) {
 		this.url = url;
 		this.target = target;
@@ -54,6 +62,22 @@ public class GraphiteDatasource implements Datasource {
 	@Override
 	public double[] getValues(int minutes) {
 		HttpClient httpClient = new DefaultHttpClient();
+		URL urlUrl;
+		try {
+			urlUrl = new URL(this.url);
+		} catch (MalformedURLException e) {
+			LOG.error("URL error: " + e.getMessage());
+			return new double[] {};
+		}
+		String protocol = urlUrl.getProtocol();
+		ProxyConfig proxyConfig = this.context.getProxyConfig(protocol);
+		if (null != proxyConfig) {
+			HttpHost proxyHost = new HttpHost(proxyConfig.getHost(),
+					proxyConfig.getPort());
+			httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
+					proxyHost);
+		}
+
 		HttpGet httpGet;
 		try {
 			httpGet = new HttpGet(this.url + "?target="
@@ -114,5 +138,10 @@ public class GraphiteDatasource implements Datasource {
 			}
 		}
 		return values;
+	}
+
+	@Override
+	public void init(Context context) {
+		this.context = context;
 	}
 }
