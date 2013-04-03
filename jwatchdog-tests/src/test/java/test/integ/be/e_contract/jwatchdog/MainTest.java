@@ -198,4 +198,15 @@ public class MainTest {
 		Main.main(new String[] { path });
 		LOG.debug("end");
 	}
+
+	@Test
+	public void testGraphiteDatasource() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-datasource-graphite.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
 }

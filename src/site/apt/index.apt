@@ -7,8 +7,9 @@ Introduction
   
   jWatchdog does not offer data collection itself.
   It assumes that you already collected the data on which you want to run jWatchdog.
-  We advise to use the facto standard tool {{{http://collectd.org/}Collectd}} for data collection.
-  We assume that you use the RRDTool collectd output plugin to store the collected data in RRD files. 
+  We advise to use the de facto standard tool {{{http://collectd.org/}Collectd}} for data collection.
+  We assume that you use the RRDTool collectd output plugin to store the collected data in RRD files,
+  or use Graphite as datasource. 
 
 Download
 
@@ -16,7 +17,7 @@ Download
 
 Usage
 
-  The jWatchdog tool is delived as a command line tool including all required dependencies.
+  The jWatchdog tool is delivered as a command line tool including all required dependencies.
   Start the tool via:
   
 +--
@@ -63,11 +64,14 @@ java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
   The basic framework itself does not offer any build-in implementation of a datasource.
   Instead the framework uses a plugin mechanism to load datasource implementations at run-time.
   jWatchdog comes with various datasource plugins out of the box.
-  The most interesting plugin is probably the {{{./jwatchdog-datasource-rrd}RRD datasource plugin}}.
+  The most interesting plugins are probably the {{{./jwatchdog-datasource-rrd}RRD datasource plugin}}
+  and the {{{./jwatchdog-datasource-graphite}Graphite datasource plugin}}.
   
   The available datasource plugins are:
   
   * {{{./jwatchdog-datasource-rrd}RRD datasource plugin}}
+  
+  * {{{./jwatchdog-datasource-graphite}Graphite datasource plugin}}
   
   * {{{./jwatchdog-datasource-static}Static datasource plugin}}
   
