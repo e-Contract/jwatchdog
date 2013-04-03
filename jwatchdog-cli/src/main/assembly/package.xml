@@ -34,6 +34,11 @@
 			<fileMode>0400</fileMode>
 		</file>
 		<file>
+			<source>${basedir}/../jwatchdog-datasource-graphite/src/main/resources/jwatchdog-datasource-graphite-config.xsd</source>
+			<outputDirectory>docs</outputDirectory>
+			<fileMode>0400</fileMode>
+		</file>
+		<file>
 			<source>${basedir}/../jwatchdog-notifier-console/src/main/resources/jwatchdog-notifier-console-config.xsd</source>
 			<outputDirectory>docs</outputDirectory>
 			<fileMode>0400</fileMode>

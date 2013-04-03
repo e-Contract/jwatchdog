@@ -216,6 +216,11 @@
 				<artifactId>jython</artifactId>
 				<version>2.5.4-rc1</version>
 			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.2.2</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -229,6 +234,7 @@
 		<module>jwatchdog-datasource-rrd</module>
 		<module>jwatchdog-datasource-static</module>
 		<module>jwatchdog-datasource-script</module>
+		<module>jwatchdog-datasource-graphite</module>
 		<module>jwatchdog-notifier-twilio</module>
 		<module>jwatchdog-notifier-spryng</module>
 		<module>jwatchdog-notifier-console</module>

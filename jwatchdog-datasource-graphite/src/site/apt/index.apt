@@ -1,0 +1,23 @@
+Introduction
+
+  The Graphite datasource plugin provides Graphite based datasources.
+
+  More information about Graphite can be found on the {{{http://graphite.wikidot.com/}Graphite web site}}.  
+
+  The plugin uses the Graphite web application REST API to retrieve data from Carbon.
+
+Usage
+
+  Example configuration for a Graphite datasource:
+
++--
+<datasource name="graphite">
+	<graphite:graphite
+		xmlns:graphite="urn:be:e-contract:jwatchdog:datasource:graphite:1.0"
+		url="http://localhost:8080/render" target="system.loadavg_1min" />
+</datasource>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-datasource-graphite-config.xsd}jWatchdog Graphite Datasource XML Schema}}

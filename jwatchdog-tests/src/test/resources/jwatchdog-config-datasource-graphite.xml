@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="11" loop="false">
+	<datasource name="graphite">
+		<graphite:graphite
+			xmlns:graphite="urn:be:e-contract:jwatchdog:datasource:graphite:1.0"
+			url="http://localhost:8080/render" target="system.loadavg_1min" />
+	</datasource>
+	<notifier name="console">
+		<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
+	</notifier>
+	<trigger description="Hello world" datasource="graphite"
+		notifier="console">
+		<condition>
+			<script type="text/javascript">
+			<![CDATA[
+				for (idx = 0; idx < jwatchdog.values.length; idx++) {
+					jwatchdog.log.debug("value: " + jwatchdog.values[idx]);
+				}
+			]]>
+			</script>
+		</condition>
+	</trigger>
+</jwatchdog-config>
