@@ -18,6 +18,7 @@
 
 package be.e_contract.jwatchdog.datasource.statik;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.statik.jaxb.config.StaticType;
 
@@ -36,5 +37,10 @@ public class StaticDatasource implements Datasource {
 	@Override
 	public double[] getValues(int minutes) {
 		return this.values;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 }

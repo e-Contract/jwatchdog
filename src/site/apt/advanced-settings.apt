@@ -1,0 +1,66 @@
+Advanced Settings
+
+* Notifier Groups
+
+  When you want to send for example notifications to both SMS and email notifiers,
+  you can use notifier groups. Example of a notifier group configuration:
+  
++--
+<notifier name="console">
+	<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
+</notifier>
+<notifier name="script">
+	<script:script xmlns:script="urn:be:e-contract:jwatchdog:notifier:script:1.0"
+		type="text/javascript">
+		println("javascript says: " + jwatchdog.message);
+	</script:script>
+</notifier>
+
+<notifier-group name="group">
+	<notifier name="console" />
+	<notifier name="script" />
+</notifier-group>
++--
+
+  In this example, the notifier group can be referred to just like a regular notifier by its name <<<group>>>.
+
+* Skipping a trigger
+
+  When a certain trigger gets out of control you can disable it via the <<<skip>>> attribute.
+  Example:
+  
++--
+<trigger description="..." datasource="..." notifier="..." 
+	skip="true">
+		...
+</trigger>
++--
+  
+* Debugging a script
+
+  When you just want to focus on debugging a certain script, 
+  you can disable the looping behavior of jWatchdog via the <<<loop>>> attribute.
+  Example configuration:
+  
++--
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="false">
+	...
+</jwatchdog-config>
++--
+  
+* Proxy settings
+
+  Sometimes datasources and notifiers will require an HTTP proxy to operate.
+  Via the jWatchdog configuration file you can also configure global proxy settings that
+  can be used by datasources and notifiers.
+  Example proxy configuration:
+  
++--
+<settings>
+	<proxies>
+		<proxy protocol="http" host="localhost" port="8008" />
+	</proxies>
+</settings>
++--

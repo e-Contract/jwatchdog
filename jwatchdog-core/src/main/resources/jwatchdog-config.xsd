@@ -7,6 +7,7 @@
 
 	<complexType name="jwatchdog-config-type">
 		<sequence>
+			<element name="settings" type="tns:settings-type" minOccurs="0" />
 			<element name="datasource" type="tns:datasource-type"
 				maxOccurs="unbounded" />
 			<element name="notifier" type="tns:notifier-type" maxOccurs="unbounded" />
@@ -39,6 +40,24 @@
 				</documentation>
 			</annotation>
 		</attribute>
+	</complexType>
+
+	<complexType name="settings-type">
+		<sequence>
+			<element name="proxies" type="tns:proxies-type" minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="proxies-type">
+		<sequence>
+			<element name="proxy" type="tns:proxy-type" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="proxy-type">
+		<attribute name="protocol" type="xs:string" use="required" />
+		<attribute name="host" type="xs:string" use="required" />
+		<attribute name="port" type="xs:int" use="required" />
 	</complexType>
 
 	<complexType name="datasource-type">

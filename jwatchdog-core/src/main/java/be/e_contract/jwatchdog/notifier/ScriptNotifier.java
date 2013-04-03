@@ -23,6 +23,8 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.e_contract.jwatchdog.Context;
+
 public class ScriptNotifier implements Notifier {
 
 	private static final Log LOG = LogFactory.getLog(ScriptNotifier.class);
@@ -57,5 +59,10 @@ public class ScriptNotifier implements Notifier {
 		for (Notifier notifier : this.notifiers) {
 			notifier.notify(message);
 		}
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 }

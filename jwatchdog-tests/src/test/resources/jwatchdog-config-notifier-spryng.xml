@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="false">
+	<settings>
+		<proxies>
+			<proxy protocol="http" host="localhost" port="8008" />
+		</proxies>
+	</settings>
+	<datasource name="static">
+		<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="spryng">
+		<spryng:spryng xmlns:spryng="urn:be:e-contract:jwatchdog:notifier:spryng:1.0"
+			username="replace_with_username" password="replace_with_password"
+			destination="32478299492" sender="32478299492" route="BUSINESS" />
+	</notifier>
+	<trigger description="Hello world" datasource="static"
+		notifier="spryng">
+		<condition>
+			<script type="text/javascript">
+				jwatchdog.notifier.notify("test notification");
+			</script>
+		</condition>
+	</trigger>
+</jwatchdog-config>

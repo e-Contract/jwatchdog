@@ -25,6 +25,7 @@ import javax.script.ScriptException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.notifier.Notifier;
 
 public class ScriptNotifier implements Notifier {
@@ -38,6 +39,11 @@ public class ScriptNotifier implements Notifier {
 	public ScriptNotifier(String mimeType, String script) {
 		this.mimeType = mimeType;
 		this.script = script;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 
 	@Override

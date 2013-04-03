@@ -18,13 +18,13 @@
 
 package test.integ.be.e_contract.jwatchdog;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import be.e_contract.jwatchdog.datasource.rrd.RRDDatasource;
-
-import static org.junit.Assert.assertNotNull;
 
 public class RRDDatasourceTest {
 
@@ -35,6 +35,7 @@ public class RRDDatasourceTest {
 		RRDDatasource rrdDatasource = new RRDDatasource(
 				"/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd",
 				"shortterm");
+		rrdDatasource.init(new WatchdogTestContext());
 		double[] values = rrdDatasource.getValues(5);
 		assertNotNull(values);
 		for (double value : values) {

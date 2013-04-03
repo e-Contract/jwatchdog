@@ -30,6 +30,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.jaxb.config.NotifierGroupElement;
 import be.e_contract.jwatchdog.jaxb.config.NotifierGroupType;
 import be.e_contract.jwatchdog.jaxb.config.NotifierType;
@@ -57,7 +58,7 @@ public class NotifierFactory {
 		this.notifierGroupConfigs = notifierGroupConfigs;
 	}
 
-	public Map<String, Set<Notifier>> getNotifiers() {
+	public Map<String, Set<Notifier>> loadNotifiers(Context context) {
 		Map<String, Set<Notifier>> notifiers = new HashMap<String, Set<Notifier>>();
 		for (NotifierType notifierConfig : this.notifierConfigs) {
 			String name = notifierConfig.getName();
@@ -73,6 +74,7 @@ public class NotifierFactory {
 			try {
 				Notifier notifier = notifierProvider
 						.loadNotifier(configElement);
+				notifier.init(context);
 				notifiers.put(name, Collections.singleton(notifier));
 			} catch (Exception e) {
 				LOG.error("error loading notifier: " + e.getMessage());

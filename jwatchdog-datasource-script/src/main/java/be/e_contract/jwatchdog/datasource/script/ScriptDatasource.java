@@ -25,6 +25,7 @@ import javax.script.ScriptException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.datasource.Datasource;
 
 public class ScriptDatasource implements Datasource {
@@ -71,5 +72,10 @@ public class ScriptDatasource implements Datasource {
 
 	public int getMinutes() {
 		return this.minutes;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 }

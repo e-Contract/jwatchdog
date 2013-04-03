@@ -6,6 +6,7 @@
 	<body>
 		<menu name="Overview">
 			<item name="Introduction" href="index.html" />
+			<item name="Advanced Settings" href="advanced-settings.html" />
 		</menu>
 		<menu ref="modules" />
 		<menu ref="reports" />

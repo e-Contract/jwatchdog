@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.notifier.Notifier;
 
 import com.twilio.sdk.TwilioRestClient;
@@ -48,6 +49,11 @@ public class TwilioNotifier implements Notifier {
 		this.token = token;
 		this.to = to;
 		this.from = from;
+	}
+
+	@Override
+	public void init(Context context) {
+		// empty
 	}
 
 	@Override
