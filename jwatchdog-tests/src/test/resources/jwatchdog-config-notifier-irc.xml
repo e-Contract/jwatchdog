@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="false">
+	<datasource name="static">
+		<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>1.0</static:value>
+			<static:value>2.0</static:value>
+			<static:value>3.0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="irc">
+		<irc:irc xmlns:irc="urn:be:e-contract:jwatchdog:notifier:irc:1.0"
+			server="irc.freenode.net" name="jwatchdog" channel="#jwatchdog" />
+	</notifier>
+	<trigger description="Hello world" datasource="static"
+		notifier="irc">
+		<condition>
+			<above value="2.5" />
+		</condition>
+	</trigger>
+</jwatchdog-config>
