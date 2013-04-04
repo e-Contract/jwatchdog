@@ -59,6 +59,9 @@ public class MailNotifier implements Notifier {
 
 	@Override
 	public void notify(String message) {
+		LOG.debug("sending mail to: " + this.to);
+		LOG.debug("message: " + message);
+
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", this.smtpServer);
 		properties.put("mail.from", this.from);
