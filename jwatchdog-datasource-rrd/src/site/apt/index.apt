@@ -22,4 +22,4 @@ Usage
 
 XML Schema
 
-  {{{./schema/jwatchdog-datasource-rrd-config.xsd}jWatchdog RRD datasource Schema}}
+  {{{./schema/jwatchdog-datasource-rrd-config.xsd}jWatchdog RRD Datasource XML Schema}}

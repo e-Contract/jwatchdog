@@ -34,4 +34,4 @@ Usage
 
 XML Schema
 
-  {{{./schema/jwatchdog-datasource-script-config.xsd}jWatchdog Script datasource plugin Schema}}
+  {{{./schema/jwatchdog-datasource-script-config.xsd}jWatchdog Script Datasource XML Schema}}
