@@ -122,6 +122,10 @@ public class GraphiteDatasource implements Datasource {
 			LOG.error("JSON parsing error: " + e.getMessage());
 			return new double[] {};
 		}
+		if (results.length == 0) {
+			LOG.warn("no graphite results for target: " + this.target);
+			return new double[] {};
+		}
 		GraphiteResult result = results[0];
 		LOG.debug("actual target: " + result.target);
 		Double[][] datapoints = result.datapoints;
