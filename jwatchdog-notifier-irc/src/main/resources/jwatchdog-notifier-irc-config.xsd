@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="1.0" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="urn:be:e-contract:jwatchdog:notifier:irc:1.0"
+	xmlns:tns="urn:be:e-contract:jwatchdog:notifier:irc:1.0">
+
+	<element name="irc" type="tns:irc-type" />
+
+	<complexType name="irc-type">
+		<attribute name="server" type="xs:string" use="required" />
+		<attribute name="name" type="xs:string" use="required" />
+		<attribute name="channel" type="xs:string" use="required" />
+	</complexType>
+
+</schema>

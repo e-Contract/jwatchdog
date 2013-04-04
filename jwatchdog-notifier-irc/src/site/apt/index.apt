@@ -1,0 +1,20 @@
+Introduction
+
+  The IRC notifier plugin provides an IRC based notifier implementation.
+
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="irc">
+	<irc:irc xmlns:irc="urn:be:e-contract:jwatchdog:notifier:irc:1.0"
+		server="irc.freenode.net" name="jwatchdog" channel="#jwatchdog" />
+</notifier>
++--
+
+  Please notice that connecting to an IRC server can take a while.
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-irc-config.xsd}jWatchdog IRC Notifier XML Schema}}

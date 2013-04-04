@@ -221,6 +221,11 @@
 				<artifactId>gson</artifactId>
 				<version>2.2.2</version>
 			</dependency>
+			<dependency>
+				<groupId>org.pircbotx</groupId>
+				<artifactId>pircbotx</artifactId>
+				<version>1.8</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -240,6 +245,7 @@
 		<module>jwatchdog-notifier-console</module>
 		<module>jwatchdog-notifier-mail</module>
 		<module>jwatchdog-notifier-script</module>
+		<module>jwatchdog-notifier-irc</module>
 		<module>jwatchdog-cli</module>
 		<module>jwatchdog-tests</module>
 	</modules>

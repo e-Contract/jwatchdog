@@ -189,6 +189,17 @@ public class MainTest {
 	}
 
 	@Test
+	public void testNotifierIRC() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-notifier-irc.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testScriptDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-script.xml");
