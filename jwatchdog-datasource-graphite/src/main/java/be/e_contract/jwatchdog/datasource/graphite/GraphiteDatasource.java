@@ -123,10 +123,7 @@ public class GraphiteDatasource implements Datasource {
 			return new double[] {};
 		}
 		GraphiteResult result = results[0];
-		if (false == this.target.equals(result.target)) {
-			LOG.error("incorrect target; " + result.target);
-			return new double[] {};
-		}
+		LOG.debug("actual target: " + result.target);
 		Double[][] datapoints = result.datapoints;
 		double[] values = new double[datapoints.length];
 		for (int idx = 0; idx < datapoints.length; idx++) {
