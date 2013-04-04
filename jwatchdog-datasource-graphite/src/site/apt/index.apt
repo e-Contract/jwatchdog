@@ -4,7 +4,7 @@ Introduction
 
   More information about Graphite can be found on the {{{http://graphite.wikidot.com/}Graphite web site}}.  
 
-  The plugin uses the Graphite web application REST API to retrieve data from Carbon.
+  The plugin uses the Graphite web application {{{http://graphite.readthedocs.org/en/latest/render_api.html}Render URL API}} to retrieve data from Carbon.
 
 Usage
 
@@ -17,6 +17,9 @@ Usage
 		url="http://localhost:8080/render" target="system.loadavg_1min" />
 </datasource>
 +--
+
+  The exact values that you can use for the <<<target>>> attribute can easily be retrieved
+  via the Graphite User Interface.
 
 XML Schema
 

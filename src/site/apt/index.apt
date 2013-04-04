@@ -61,6 +61,8 @@ java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
 </datasource>
 +--
   
+  A datasource yields an array of double values over an interval from present until the last
+  time that jWatchdog was active (i.e. indicated by the <<<sleep>>> attribute).
   The basic framework itself does not offer any build-in implementation of a datasource.
   Instead the framework uses a plugin mechanism to load datasource implementations at run-time.
   jWatchdog comes with various datasource plugins out of the box.
