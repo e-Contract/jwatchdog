@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="false">
+	<datasource name="static">
+		<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>1.0</static:value>
+			<static:value>2.0</static:value>
+			<static:value>3.0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="file">
+		<file:file xmlns:file="urn:be:e-contract:jwatchdog:notifier:file:1.0"
+			file="/home/fcorneli/jwatchdog-notifications.txt" />
+	</notifier>
+	<trigger description="Hello world" datasource="static"
+		notifier="file">
+		<condition>
+			<above value="2.5" />
+		</condition>
+	</trigger>
+</jwatchdog-config>

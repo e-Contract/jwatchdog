@@ -246,6 +246,7 @@
 		<module>jwatchdog-notifier-mail</module>
 		<module>jwatchdog-notifier-script</module>
 		<module>jwatchdog-notifier-irc</module>
+		<module>jwatchdog-notifier-file</module>
 		<module>jwatchdog-cli</module>
 		<module>jwatchdog-tests</module>
 	</modules>

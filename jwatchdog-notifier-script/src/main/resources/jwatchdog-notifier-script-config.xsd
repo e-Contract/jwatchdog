@@ -14,13 +14,13 @@
 
 				"message" of type
 				string.
-				
+
 				"log" a Commons Logging logger.
 			</documentation>
 		</annotation>
 		<simpleContent>
 			<extension base="xs:string">
-				<attribute name="type" type="xs:string" />
+				<attribute name="type" type="xs:string" use="required" />
 			</extension>
 		</simpleContent>
 	</complexType>
