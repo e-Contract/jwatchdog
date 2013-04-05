@@ -1,0 +1,18 @@
+Introduction
+
+  The file notifier plugin provides a simple file based notifier.
+
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="file">
+	<file:file xmlns:file="urn:be:e-contract:jwatchdog:notifier:file:1.0"
+		file="/home/fcorneli/jwatchdog-notifications.txt" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-file-config.xsd}jWatchdog File Notifier XML Schema}}

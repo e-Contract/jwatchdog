@@ -107,6 +107,8 @@ java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
   
   * {{{./jwatchdog-notifier-irc}IRC notifier plugin}}
   
+  * {{{./jwatchdog-notifier-file}File notifier plugin}}
+  
 * Trigger
 
   Now that we defined our datasources and notifiers, it is time to express our trigger conditions.

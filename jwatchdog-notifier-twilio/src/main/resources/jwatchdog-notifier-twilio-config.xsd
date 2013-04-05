@@ -15,10 +15,10 @@
 				https://www.twilio.com/
 			</documentation>
 		</annotation>
-		<attribute name="account" type="xs:string" />
-		<attribute name="token" type="xs:string" />
-		<attribute name="from" type="xs:string" />
-		<attribute name="to" type="xs:string" />
+		<attribute name="account" type="xs:string" use="required" />
+		<attribute name="token" type="xs:string" use="required" />
+		<attribute name="from" type="xs:string" use="required" />
+		<attribute name="to" type="xs:string" use="required" />
 	</complexType>
 
 </schema>

@@ -11,13 +11,14 @@
 			<documentation>
 				Spryng based SMS notifier.
 
-				See also: http://www.spryng.be/
+				See also:
+				http://www.spryng.be/
 			</documentation>
 		</annotation>
-		<attribute name="username" type="xs:string" />
-		<attribute name="password" type="xs:string" />
-		<attribute name="destination" type="xs:string" />
-		<attribute name="sender" type="xs:string" />
+		<attribute name="username" type="xs:string" use="required" />
+		<attribute name="password" type="xs:string" use="required" />
+		<attribute name="destination" type="xs:string" use="required" />
+		<attribute name="sender" type="xs:string" use="required" />
 		<attribute name="route" type="tns:route-type" />
 	</complexType>
 
