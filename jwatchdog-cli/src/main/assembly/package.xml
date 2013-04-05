@@ -73,6 +73,11 @@
 			<outputDirectory>docs</outputDirectory>
 			<fileMode>0400</fileMode>
 		</file>
+		<file>
+			<source>${basedir}/../jwatchdog-notifier-desktop/src/main/resources/jwatchdog-notifier-desktop-config.xsd</source>
+			<outputDirectory>docs</outputDirectory>
+			<fileMode>0400</fileMode>
+		</file>
 	</files>
 	<fileSets>
 		<fileSet>

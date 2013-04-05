@@ -1,0 +1,18 @@
+Introduction
+
+  The desktop notifier plugin provides a simple desktop based notifier.
+
+Usage
+
+  Example configuration:
+  
++--
+<notifier name="desktop">
+	<desktop:desktop xmlns:desktop="urn:be:e-contract:jwatchdog:notifier:desktop:1.0"
+		title="jWatchdog Notification" />
+</notifier>
++--
+
+XML Schema
+
+  {{{./schema/jwatchdog-notifier-desktop-config.xsd}jWatchdog Desktop Notifier XML Schema}}
