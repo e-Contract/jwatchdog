@@ -123,10 +123,29 @@
 		<dependency>
 			<groupId>org.jruby</groupId>
 			<artifactId>jruby-core</artifactId>
+			<exclusions>
+				<!-- jython embeds several generic dependencies -->
+				<exclusion>
+					<groupId>jline</groupId>
+					<artifactId>jline</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.jnr</groupId>
+					<artifactId>jffi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.jnr</groupId>
+					<artifactId>jnr-netdb</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-jsr223</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.python</groupId>
+			<artifactId>jython</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
