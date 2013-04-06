@@ -185,7 +185,7 @@ java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml
 +--
 
   To prevent you from having to learn yet-another-scripting-language, we use a similar plugin mechanism for supporting various well known scripting languages.
-  jWatchdog out-of-the-box supports the Javascript, Ruby, and Groovy scripting languages.
+  jWatchdog out-of-the-box supports the Javascript, Ruby, Python, and Groovy scripting languages.
   Via the <<<type>>> attribute you define the scripting language you want to use.
   The <<<type>>> attribute is simple the official mime type of your preferred scripting language.
   

@@ -2,7 +2,7 @@ Introduction
 
   The script notifier plugin provides script based notifiers.
   
-  The scripting language can be Javascript, Ruby, or Groovy.
+  The scripting language can be Javascript, Ruby, Python, or Groovy.
 
 Usage
 

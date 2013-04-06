@@ -2,7 +2,7 @@ Introduction
 
   The script datasource plugin provides script based datasources.
   
-  The scripting language can be Javascript, Ruby, or Groovy.
+  The scripting language can be Javascript, Ruby, Python, or Groovy.
   
 Usage
 
