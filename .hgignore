@@ -8,5 +8,7 @@ target
 .idea
 jwatchdog-*/src/site/resources/schema/*.xsd
 jwatchdog-tests/src/site/resources/examples/jwatchdog-config-*.xml
+jwatchdog-android/bin
+jwatchdog-android/gen
 
 syntax: regexp
