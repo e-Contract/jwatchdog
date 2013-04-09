@@ -67,6 +67,8 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 							Intent.FLAG_ACTIVITY_NEW_TASK);
 					alarmManager.set(AlarmManager.RTC_WAKEUP,
 							System.currentTimeMillis(), pendingIntent);
+					// prevent SMS from showing up like a regular SMS
+					this.abortBroadcast();
 				}
 			}
 		}
