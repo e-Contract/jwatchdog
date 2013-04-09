@@ -18,12 +18,18 @@
 
 package be.e_contract.jwatchdog.android;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
+import android.util.Log;
 
 public class SMSBroadcastReceiver extends BroadcastReceiver {
 
@@ -31,12 +37,44 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
 		if ("android.provider.Telephony.SMS_RECEIVED".equals(action)) {
+			Log.d(Constants.TAG, "receiving SMS");
+			SharedPreferences sharedPreferences = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			String prefix = sharedPreferences.getString("prefix", null);
+			if (null == prefix) {
+				return;
+			}
+			if (0 == prefix.length()) {
+				return;
+			}
 			Bundle bundle = intent.getExtras();
 			Object[] pdus = (Object[]) bundle.get("pdus");
 			for (Object pdu : pdus) {
 				SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu);
-				Toast.makeText(context, smsMessage.getDisplayMessageBody(),
-						Toast.LENGTH_LONG).show();
+				String body = smsMessage.getDisplayMessageBody();
+				if (body.startsWith(prefix)) {
+					body = body.substring(prefix.length());
+					ContentValues contentValues = new ContentValues();
+					contentValues.put(DatabaseHelper.NOTIFICATIONS_MESSAGE_COL,
+							body);
+					DatabaseHelper databaseHelper = new DatabaseHelper(context);
+					SQLiteDatabase database = databaseHelper
+							.getWritableDatabase();
+					try {
+						database.insertOrThrow(
+								DatabaseHelper.NOTIFICATIONS_TABLE, null,
+								contentValues);
+					} finally {
+						database.close();
+					}
+					AlarmManager alarmManager = (AlarmManager) context
+							.getSystemService(Context.ALARM_SERVICE);
+					Intent alarmIntent = new Intent(context, MainActivity.class);
+					PendingIntent pendingIntent = PendingIntent.getActivity(
+							context, 0, alarmIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+					alarmManager.set(AlarmManager.RTC_WAKEUP,
+							System.currentTimeMillis(), pendingIntent);
+				}
 			}
 		}
 	}

@@ -18,36 +18,14 @@
 
 package be.e_contract.jwatchdog.android;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.preference.PreferenceActivity;
 
-public class MainActivity extends FragmentActivity {
+public class PrefsActivity extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater menuInflater = getMenuInflater();
-		menuInflater.inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		switch (itemId) {
-		case R.id.action_settings:
-			startActivity(new Intent(this, PrefsActivity.class));
-			break;
-		}
-		return true;
+		addPreferencesFromResource(R.xml.prefs);
 	}
 }

@@ -32,7 +32,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<sdk>
-						<platform>8</platform>
+						<platform>4</platform>
 					</sdk>
 				</configuration>
 			</plugin>
@@ -40,6 +40,10 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>support-v4</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
