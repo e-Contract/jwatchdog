@@ -18,6 +18,8 @@
 
 package be.e_contract.jwatchdog.android;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -47,6 +49,25 @@ public class MainActivity extends FragmentActivity {
 		case R.id.action_settings:
 			startActivity(new Intent(this, PrefsActivity.class));
 			break;
+		case R.id.action_remove_all: {
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					this);
+			alertDialogBuilder.setTitle(R.string.action_remove_all);
+			alertDialogBuilder.setMessage(R.string.remove_all_question);
+			alertDialogBuilder.setPositiveButton(R.string.ok,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							getContentResolver().delete(
+									NotificationContentProvider.DELETE_ALL_URI,
+									null, null);
+						}
+					});
+			alertDialogBuilder.setNegativeButton(R.string.cancel, null);
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			alertDialog.show();
+			break;
+		}
 		}
 		return true;
 	}
