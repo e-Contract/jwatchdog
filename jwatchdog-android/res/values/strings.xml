@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">WatchdogClient</string>
+    <string name="app_name">Watchdog Client</string>
     <string name="action_settings">Settings</string>
     <string name="titlePrefix">Prefix</string>
     <string name="summaryPrefix">The SMS message prefix on which the Watchdog Client should filter.</string>
