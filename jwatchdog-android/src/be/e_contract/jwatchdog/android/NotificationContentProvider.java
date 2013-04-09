@@ -45,15 +45,29 @@ public class NotificationContentProvider extends ContentProvider {
 	public final static Uri INSERT_URI = Uri.parse("content://" + AUTHORITY
 			+ "/" + INSERT_PATH);
 
+	private final static String DELETE_ALL_PATH = "delete";
+	private final static int DELETE_ALL_CODE = 300;
+	public final static Uri DELETE_ALL_URI = Uri.parse("content://" + AUTHORITY
+			+ "/" + DELETE_ALL_PATH);
+
 	private DatabaseHelper databaseHelper;
 
 	static {
 		URI_MATCHER.addURI(AUTHORITY, NOTIFICATIONS_PATH, NOTIFICATIONS_CODE);
 		URI_MATCHER.addURI(AUTHORITY, INSERT_PATH, INSERT_CODE);
+		URI_MATCHER.addURI(AUTHORITY, DELETE_ALL_PATH, DELETE_ALL_CODE);
 	}
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		Log.d(Constants.TAG, "delete");
+		SQLiteDatabase database = this.databaseHelper.getWritableDatabase();
+		try {
+			database.delete(DatabaseHelper.NOTIFICATIONS_TABLE, null, null);
+		} finally {
+			database.close();
+		}
+		getContext().getContentResolver().notifyChange(NOTIFICATIONS_URI, null);
 		return 0;
 	}
 
