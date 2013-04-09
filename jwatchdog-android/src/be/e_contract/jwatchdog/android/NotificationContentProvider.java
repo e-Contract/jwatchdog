@@ -40,10 +40,16 @@ public class NotificationContentProvider extends ContentProvider {
 	public final static Uri NOTIFICATIONS_URI = Uri.parse("content://"
 			+ AUTHORITY + "/" + NOTIFICATIONS_PATH);
 
+	private final static String INSERT_PATH = "insert";
+	private final static int INSERT_CODE = 200;
+	public final static Uri INSERT_URI = Uri.parse("content://" + AUTHORITY
+			+ "/" + INSERT_PATH);
+
 	private DatabaseHelper databaseHelper;
 
 	static {
 		URI_MATCHER.addURI(AUTHORITY, NOTIFICATIONS_PATH, NOTIFICATIONS_CODE);
+		URI_MATCHER.addURI(AUTHORITY, INSERT_PATH, INSERT_CODE);
 	}
 
 	@Override
@@ -58,6 +64,14 @@ public class NotificationContentProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues contentValues) {
+		Log.d(Constants.TAG, "insert");
+		SQLiteDatabase database = this.databaseHelper.getWritableDatabase();
+		try {
+			database.insertOrThrow(DatabaseHelper.NOTIFICATIONS_TABLE, null,
+					contentValues);
+		} finally {
+			database.close();
+		}
 		return null;
 	}
 

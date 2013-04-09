@@ -25,7 +25,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.SmsMessage;
@@ -57,21 +56,15 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(DatabaseHelper.NOTIFICATIONS_MESSAGE_COL,
 							body);
-					DatabaseHelper databaseHelper = new DatabaseHelper(context);
-					SQLiteDatabase database = databaseHelper
-							.getWritableDatabase();
-					try {
-						database.insertOrThrow(
-								DatabaseHelper.NOTIFICATIONS_TABLE, null,
-								contentValues);
-					} finally {
-						database.close();
-					}
+					context.getContentResolver().insert(
+							NotificationContentProvider.INSERT_URI,
+							contentValues);
 					AlarmManager alarmManager = (AlarmManager) context
 							.getSystemService(Context.ALARM_SERVICE);
 					Intent alarmIntent = new Intent(context, MainActivity.class);
 					PendingIntent pendingIntent = PendingIntent.getActivity(
-							context, 0, alarmIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+							context, 0, alarmIntent,
+							Intent.FLAG_ACTIVITY_NEW_TASK);
 					alarmManager.set(AlarmManager.RTC_WAKEUP,
 							System.currentTimeMillis(), pendingIntent);
 				}
