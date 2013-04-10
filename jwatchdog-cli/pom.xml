@@ -34,6 +34,28 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-jwatchdog-android</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>be.e_contract.jwatchdog</groupId>
+									<artifactId>jwatchdog-android</artifactId>
+									<type>apk</type>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
@@ -119,6 +141,13 @@
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-desktop</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>be.e_contract.jwatchdog</groupId>
+			<artifactId>jwatchdog-android</artifactId>
+			<type>apk</type>
+			<version>1.0.0-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jruby</groupId>
