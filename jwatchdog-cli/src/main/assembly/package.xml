@@ -88,5 +88,12 @@
 			</includes>
 			<fileMode>0600</fileMode>
 		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/dependency</directory>
+			<outputDirectory>android</outputDirectory>
+			<includes>
+				<include>*.apk</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 </assembly>
