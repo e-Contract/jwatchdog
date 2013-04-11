@@ -52,16 +52,21 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 				SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu);
 				String body = smsMessage.getDisplayMessageBody();
 				if (body.startsWith(prefix)) {
+					long timestamp = smsMessage.getTimestampMillis();
 					body = body.substring(prefix.length());
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(DatabaseHelper.NOTIFICATIONS_MESSAGE_COL,
 							body);
+					contentValues.put(
+							DatabaseHelper.NOTIFICATIONS_TIMESTAMP_COL,
+							timestamp);
 					context.getContentResolver().insert(
 							NotificationContentProvider.INSERT_URI,
 							contentValues);
 					AlarmManager alarmManager = (AlarmManager) context
 							.getSystemService(Context.ALARM_SERVICE);
 					Intent alarmIntent = new Intent(context, MainActivity.class);
+					alarmIntent.putExtra(MainActivity.ALARM_EXTRA, true);
 					PendingIntent pendingIntent = PendingIntent.getActivity(
 							context, 0, alarmIntent,
 							Intent.FLAG_ACTIVITY_NEW_TASK);
