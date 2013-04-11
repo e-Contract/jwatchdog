@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>be.e_contract.jwatchdog</groupId>
 		<artifactId>jwatchdog</artifactId>
-		<version>1.0.0.Beta1</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>be.e_contract.jwatchdog</groupId>
 	<artifactId>jwatchdog-notifier-console</artifactId>
-	<version>1.0.0.Beta1</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Java Watchdog Console Notifier</name>
@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-core</artifactId>
-			<version>1.0.0.Beta1</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
