@@ -1,0 +1,13 @@
+Introduction
+
+  The jWatchdog Android Client delivers a small Android (version 1.6) application 
+  that intercepts SMS messages with a certain prefix.
+  This prefix can be configured from within the application itself and should
+  correspond with the <<<notificationPrefix>>> attribute as configured within
+  your jWatchdog configuration file.
+
+  When receiving an SMS message with a matching notification prefix, the
+  application saves the SMS message within its own database, and erases the
+  original SMS message. After correct storage, the application alarms the
+  user using the default configured ringtone. The end-user should acknowledge
+  the reception of the jWatchdog notification to stop the alarm.
