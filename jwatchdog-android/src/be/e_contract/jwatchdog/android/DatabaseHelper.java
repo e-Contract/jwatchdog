@@ -28,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final int DB_VERSION = 1;
 	public static final String NOTIFICATIONS_TABLE = "notifications";
 	public static final String NOTIFICATIONS_ID_COL = "_id";
+	public static final String NOTIFICATIONS_TIMESTAMP_COL = "ts";
 	public static final String NOTIFICATIONS_MESSAGE_COL = "msg";
 
 	public DatabaseHelper(Context context) {
@@ -38,6 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 		String sql = "CREATE TABLE " + NOTIFICATIONS_TABLE + "("
 				+ NOTIFICATIONS_ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ NOTIFICATIONS_TIMESTAMP_COL + " INTEGER NOT NULL,"
 				+ NOTIFICATIONS_MESSAGE_COL + " TEXT NOT NULL" + ")";
 		database.execSQL(sql);
 	}

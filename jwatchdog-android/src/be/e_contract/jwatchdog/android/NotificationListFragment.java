@@ -43,9 +43,11 @@ public class NotificationListFragment extends ListFragment implements
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		Context context = getActivity().getApplicationContext();
 		this.simpleCursorAdapter = new SimpleCursorAdapter(context,
-				R.layout.row, null,
-				new String[] { DatabaseHelper.NOTIFICATIONS_MESSAGE_COL },
-				new int[] { R.id.messageTextView });
+				R.layout.row, null, new String[] {
+						DatabaseHelper.NOTIFICATIONS_MESSAGE_COL,
+						DatabaseHelper.NOTIFICATIONS_TIMESTAMP_COL },
+				new int[] { R.id.messageTextView, R.id.timestampTextView });
+		this.simpleCursorAdapter.setViewBinder(new NotificationViewBinder(context));
 		setListAdapter(this.simpleCursorAdapter);
 		getLoaderManager().initLoader(0, null, this);
 		return view;
