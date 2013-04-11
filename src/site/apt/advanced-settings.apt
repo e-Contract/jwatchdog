@@ -64,3 +64,19 @@ Advanced Settings
 	</proxies>
 </settings>
 +--
+
+* Notification prefix
+
+  You can configure jWatchdog to prefix every notification message.
+  This notification prefix can be interesting in combination with the
+  {{{./jwatchdog-android}Android application}}.
+
+  Example configuration:
+  
++--
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	notificationPrefix="e-contract.be:">
+	...
+</jwatchdog-config>
++--
