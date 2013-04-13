@@ -58,31 +58,31 @@
 	<trigger description="Load too high" datasource="load-shortterm"
 		notifier="group">
 		<condition>
-			<above value="2.0" />
+			<above value="1.5" />
 		</condition>
 	</trigger>
 	<trigger description="Temperature too high" datasource="temp"
 		notifier="group">
 		<condition>
-			<above value="25" />
+			<above value="22" />
 		</condition>
 	</trigger>
 	<trigger description="Root disk space too low" datasource="root"
 		notifier="group">
 		<condition>
-			<below value="10 GiB" />
+			<below value="30 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="Home disk space too low" datasource="home"
 		notifier="group">
 		<condition>
-			<below value="10 GiB" />
+			<below value="100 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="Used memory too high" datasource="memory-used"
 		notifier="group">
 		<condition>
-			<above value="15 GiB" />
+			<above value="10 GiB" />
 		</condition>
 	</trigger>
 	<trigger description="JBoss used memory too high" datasource="jboss-memory-used"
@@ -128,7 +128,8 @@
 					
 					function main() {
 						for (idx = 0; idx < jwatchdog.values.length; idx++) {
-							if (jwatchdog.values[idx] > 2.0) {
+							jwatchdog.log.debug("value: " + jwatchdog.values[idx]);
+							if (jwatchdog.values[idx] > 5.0) {
 								jwatchdog.notifier.notify("eID IdP response time too high (peek)");
 								return;
 							}
@@ -144,6 +145,7 @@
 					}
 					
 					main();
+					//jwatchdog.notifier.notify("test notification");
 				]]>
 			</script>
 		</condition>
