@@ -27,7 +27,10 @@ import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,22 +40,32 @@ public class MainActivity extends FragmentActivity {
 
 	public static final String ALARM_EXTRA = "alarm";
 
+	private MediaPlayer mediaPlayer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
 		Intent intent = getIntent();
+		startAlarm(intent);
+	}
+
+	private void startAlarm(Intent intent) {
 		boolean alarm = intent.getBooleanExtra(ALARM_EXTRA, false);
 		if (false == alarm) {
 			return;
 		}
 
+		if (null != this.mediaPlayer) {
+			return;
+		}
+
 		Uri alarmUri = getAlarmUri();
 		Log.d(Constants.TAG, "alarm URI: " + alarmUri);
-		final MediaPlayer mediaPlayer = new MediaPlayer();
+		this.mediaPlayer = new MediaPlayer();
 		try {
-			mediaPlayer.setDataSource(this, alarmUri);
+			this.mediaPlayer.setDataSource(this, alarmUri);
 		} catch (Exception e) {
 			Log.e(Constants.TAG,
 					"media player data source error: " + e.getMessage());
@@ -62,16 +75,16 @@ public class MainActivity extends FragmentActivity {
 				.getSystemService(Context.AUDIO_SERVICE);
 		int volume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 		if (0 != volume) {
-			mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-			mediaPlayer.setLooping(true);
+			this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+			this.mediaPlayer.setLooping(true);
 			try {
-				mediaPlayer.prepare();
+				this.mediaPlayer.prepare();
 			} catch (Exception e) {
 				Log.e(Constants.TAG,
 						"media player prepare error: " + e.getMessage());
 				return;
 			}
-			mediaPlayer.start();
+			this.mediaPlayer.start();
 		}
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -81,12 +94,38 @@ public class MainActivity extends FragmentActivity {
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						mediaPlayer.stop();
-						mediaPlayer.release();
+						stopMediaPlayer();
 					}
 				});
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		Log.d(Constants.TAG, "onNewIntent");
+		startAlarm(intent);
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		Fragment fragment = fragmentManager
+				.findFragmentById(R.id.notificationListFragment);
+		LoaderManager loaderManager = fragment.getLoaderManager();
+		loaderManager.getLoader(0).forceLoad();
+	}
+
+	@Override
+	protected void onDestroy() {
+		stopMediaPlayer();
+		super.onDestroy();
+	}
+
+	private void stopMediaPlayer() {
+		if (null == this.mediaPlayer) {
+			return;
+		}
+		this.mediaPlayer.stop();
+		this.mediaPlayer.release();
+		this.mediaPlayer = null;
 	}
 
 	private Uri getAlarmUri() {
