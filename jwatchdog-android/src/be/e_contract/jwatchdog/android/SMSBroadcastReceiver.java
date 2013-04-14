@@ -69,7 +69,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 					alarmIntent.putExtra(MainActivity.ALARM_EXTRA, true);
 					PendingIntent pendingIntent = PendingIntent.getActivity(
 							context, 0, alarmIntent,
-							Intent.FLAG_ACTIVITY_NEW_TASK);
+							PendingIntent.FLAG_UPDATE_CURRENT);
 					alarmManager.set(AlarmManager.RTC_WAKEUP,
 							System.currentTimeMillis(), pendingIntent);
 					// prevent SMS from showing up like a regular SMS
