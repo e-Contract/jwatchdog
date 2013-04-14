@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.e_contract.jwatchdog.android"
-    android:versionCode="2"
-    android:versionName="1.0.0.Beta2" >
+    android:versionCode="3"
+    android:versionName="1.0.0.Beta3" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -15,8 +15,9 @@
         android:label="@string/app_name" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask" >
+            android:label="@string/app_name" >
+
+            <!-- android:launchMode="singleTask" cannot wake from deep sleep -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
