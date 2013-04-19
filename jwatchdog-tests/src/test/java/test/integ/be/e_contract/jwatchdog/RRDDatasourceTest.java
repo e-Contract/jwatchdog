@@ -42,4 +42,17 @@ public class RRDDatasourceTest {
 			LOG.debug("value: " + value);
 		}
 	}
+
+	@Test
+	public void testOpenFiles() throws Exception {
+		int count = 10000;
+		while (count > 0) {
+			count--;
+			RRDDatasource rrdDatasource = new RRDDatasource(
+					"/opt/collectd/var/lib/collectd/rrd/e-contract.be/load/load.rrd",
+					"shortterm");
+			rrdDatasource.init(new WatchdogTestContext());
+			rrdDatasource.getValues(5);
+		}
+	}
 }
