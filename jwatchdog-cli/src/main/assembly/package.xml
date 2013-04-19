@@ -78,6 +78,11 @@
 			<outputDirectory>docs</outputDirectory>
 			<fileMode>0400</fileMode>
 		</file>
+		<file>
+			<source>${basedir}/src/main/resources/log4j.xml</source>
+			<outputDirectory>config</outputDirectory>
+			<fileMode>0600</fileMode>
+		</file>
 	</files>
 	<fileSets>
 		<fileSet>
