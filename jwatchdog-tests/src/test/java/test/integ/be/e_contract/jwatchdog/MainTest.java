@@ -156,6 +156,20 @@ public class MainTest {
 	}
 
 	@Test
+	public void testLogConfiguration() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-javascript.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		URL logConfigUrl = MainTest.class.getResource("/test-log4j.xml");
+		String logConfigPath = logConfigUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		LOG.debug("log config path: " + logConfigPath);
+		Main.main(new String[] { path, logConfigPath });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testJavascriptAverage() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-javascript-average.xml");
