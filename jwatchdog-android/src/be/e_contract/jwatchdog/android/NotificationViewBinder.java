@@ -31,19 +31,26 @@ public class NotificationViewBinder implements ViewBinder {
 
 	private final Context context;
 
+	private final DateFormat timeFormat;
+
+	private final DateFormat dateFormat;
+
 	public NotificationViewBinder(Context context) {
 		this.context = context;
+		this.timeFormat = android.text.format.DateFormat
+				.getTimeFormat(this.context);
+		this.dateFormat = android.text.format.DateFormat
+				.getDateFormat(this.context);
 	}
 
 	@Override
 	public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 		if (columnIndex == cursor
 				.getColumnIndex(DatabaseHelper.NOTIFICATIONS_TIMESTAMP_COL)) {
-			DateFormat dateFormat = android.text.format.DateFormat
-					.getTimeFormat(context);
-			long date = cursor.getLong(columnIndex);
+			Date date = new Date(cursor.getLong(columnIndex));
 			TextView textView = (TextView) view;
-			textView.setText(dateFormat.format(new Date(date)));
+			textView.setText(this.dateFormat.format(date) + " "
+					+ this.timeFormat.format(date));
 			return true;
 		}
 		return false;
