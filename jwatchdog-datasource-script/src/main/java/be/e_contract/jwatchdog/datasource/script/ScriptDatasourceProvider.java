@@ -27,7 +27,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.dom.DOMSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
+import org.xml.sax.Locator;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.DatasourceProvider;
@@ -35,6 +38,9 @@ import be.e_contract.jwatchdog.datasource.script.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.datasource.script.jaxb.config.ScriptType;
 
 public class ScriptDatasourceProvider implements DatasourceProvider {
+
+	private static final Log LOG = LogFactory
+			.getLog(ScriptDatasourceProvider.class);
 
 	private final Unmarshaller unmarshaller;
 
@@ -56,9 +62,12 @@ public class ScriptDatasourceProvider implements DatasourceProvider {
 
 	@Override
 	public Datasource loadDatasource(Element configElement) throws Exception {
+		DOMSource domSource = new DOMSource(configElement);
 		JAXBElement<ScriptType> scriptElement = (JAXBElement<ScriptType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
+				.unmarshal(domSource);
 		ScriptType scriptConfig = scriptElement.getValue();
+		Locator locator = scriptConfig.sourceLocation();
+		LOG.debug("script:script line number: " + locator.getLineNumber());
 		String mimeType = scriptConfig.getType();
 		String script = scriptConfig.getValue();
 		return new ScriptDatasource(mimeType, script);

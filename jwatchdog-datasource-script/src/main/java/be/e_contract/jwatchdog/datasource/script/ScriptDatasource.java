@@ -61,6 +61,9 @@ public class ScriptDatasource implements Datasource {
 			scriptEngine.eval(this.script);
 		} catch (ScriptException e) {
 			LOG.error("script error: " + e.getMessage());
+			int scriptLineNumber = e.getLineNumber();
+			LOG.error("line number of error in script itself: "
+					+ scriptLineNumber);
 			return new double[] {};
 		}
 		return this.values;

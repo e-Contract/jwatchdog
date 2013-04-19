@@ -30,6 +30,7 @@ import javax.script.ScriptException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.Locator;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
 import be.e_contract.jwatchdog.datasource.DatasourceFactory;
@@ -62,6 +63,10 @@ public class Main {
 			return;
 		}
 
+		LOG.debug("java version: " + System.getProperty("java.version"));
+		LOG.debug("OS name: " + System.getProperty("os.name"));
+		LOG.debug("OS arch: " + System.getProperty("os.arch"));
+		LOG.debug("OS version: " + System.getProperty("os.version"));
 		LOG.debug("supported scripting languages:");
 		ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
 		List<ScriptEngineFactory> scriptEngineFactories = scriptEngineManager
@@ -215,6 +220,11 @@ public class Main {
 					scriptEngine.eval(script.getValue());
 				} catch (ScriptException e) {
 					LOG.error("script error: " + e.getMessage());
+					Locator locator = script.sourceLocation();
+					int scriptXmlLineNumber = locator.getLineNumber();
+					int scriptLineNumber = e.getLineNumber();
+					int lineNumber = scriptXmlLineNumber + scriptLineNumber - 1;
+					LOG.error("script error line number: " + lineNumber);
 				}
 			}
 		}
