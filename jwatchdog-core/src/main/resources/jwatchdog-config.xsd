@@ -12,7 +12,7 @@
 				maxOccurs="unbounded" />
 			<element name="notifier" type="tns:notifier-type" maxOccurs="unbounded" />
 			<element name="notifier-group" type="tns:notifier-group-type"
-				maxOccurs="unbounded" />
+				maxOccurs="unbounded" minOccurs="0" />
 			<element name="trigger" type="tns:trigger-type" maxOccurs="unbounded" />
 		</sequence>
 		<attribute name="sleep" type="xs:int" use="required">
@@ -62,14 +62,14 @@
 
 	<complexType name="datasource-type">
 		<sequence>
-			<any />
+			<any processContents="lax" />
 		</sequence>
 		<attribute name="name" type="xs:ID" use="required" />
 	</complexType>
 
 	<complexType name="notifier-type">
 		<sequence>
-			<any />
+			<any processContents="lax" />
 		</sequence>
 		<attribute name="name" type="xs:ID" use="required" />
 	</complexType>
@@ -119,11 +119,13 @@
 	</complexType>
 
 	<complexType name="condition-type">
-		<all>
-			<element name="above" type="tns:above-type" />
-			<element name="below" type="tns:below-type" />
-			<element name="script" type="tns:script-type" />
-		</all>
+		<sequence>
+			<choice>
+				<element name="above" type="tns:above-type" />
+				<element name="below" type="tns:below-type" />
+				<element name="script" type="tns:script-type" />
+			</choice>
+		</sequence>
 	</complexType>
 
 	<complexType name="above-type">
