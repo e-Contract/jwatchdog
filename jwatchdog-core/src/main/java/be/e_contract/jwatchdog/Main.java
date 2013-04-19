@@ -71,6 +71,11 @@ public class Main {
 					+ scriptEngineFactory.getLanguageName());
 			List<String> mimetypes = scriptEngineFactory.getMimeTypes();
 			LOG.debug("\tmimetypes: " + mimetypes);
+			LOG.debug("\tscript language version: "
+					+ scriptEngineFactory.getLanguageVersion());
+			LOG.debug("\tengine: " + scriptEngineFactory.getEngineName());
+			LOG.debug("\tengine version: "
+					+ scriptEngineFactory.getEngineVersion());
 		}
 
 		Config config = new Config(configFile.toURI().toURL());
