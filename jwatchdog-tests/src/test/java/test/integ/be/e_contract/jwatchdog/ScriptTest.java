@@ -20,6 +20,8 @@ package test.integ.be.e_contract.jwatchdog;
 
 import java.util.List;
 
+import javax.script.Compilable;
+import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 
@@ -40,7 +42,17 @@ public class ScriptTest {
 			LOG.debug("script language: "
 					+ scriptEngineFactory.getLanguageName());
 			List<String> mimetypes = scriptEngineFactory.getMimeTypes();
-			LOG.debug("mimetypes: " + mimetypes);
+			LOG.debug("\tmimetypes: " + mimetypes);
+			LOG.debug("\tengine name: " + scriptEngineFactory.getEngineName());
+			LOG.debug("\tengine version: "
+					+ scriptEngineFactory.getEngineVersion());
+			LOG.debug("\tlanguage name: "
+					+ scriptEngineFactory.getLanguageName());
+			LOG.debug("\tlanguage version: "
+					+ scriptEngineFactory.getLanguageVersion());
+			ScriptEngine scriptEngine = scriptEngineFactory.getScriptEngine();
+			boolean canCompile = scriptEngine instanceof Compilable;
+			LOG.debug("\tcan compile: " + canCompile);
 		}
 	}
 }
