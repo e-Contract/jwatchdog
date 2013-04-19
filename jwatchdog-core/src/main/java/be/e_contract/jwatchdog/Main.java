@@ -30,6 +30,7 @@ import javax.script.ScriptException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.xml.sax.Locator;
 
 import be.e_contract.jwatchdog.datasource.Datasource;
@@ -57,6 +58,12 @@ public class Main {
 			printUsage();
 			return;
 		}
+
+		if (args.length > 1) {
+			String logConfigFile = args[1];
+			DOMConfigurator.configure(logConfigFile);
+		}
+
 		LOG.debug("jWatchdog");
 		File configFile = new File(args[0]);
 		if (!configFile.exists()) {
@@ -233,6 +240,6 @@ public class Main {
 	private static void printUsage() {
 		System.out.println("jWatchdog");
 		System.out
-				.println("Usage: java -jar jwatchdog-cli-xxx.jar jwatchdog-config.xml");
+				.println("Usage: java -jar jwatchdog-cli-xxx.jar jwatchdog-config.xml [log4j.xml]");
 	}
 }
