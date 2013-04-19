@@ -26,6 +26,7 @@ import java.util.ServiceLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
+import org.xml.sax.Locator;
 
 import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.jaxb.config.DatasourceType;
@@ -54,6 +55,8 @@ public class DatasourceFactory {
 		for (DatasourceType datasourceConfig : this.datasourcesConfig) {
 			String name = datasourceConfig.getName();
 			LOG.debug("loading datasource: " + name);
+			Locator locator = datasourceConfig.sourceLocation();
+			LOG.debug("XML line number: " + locator.getLineNumber());
 			Element configElement = (Element) datasourceConfig.getAny();
 			String configNamespace = configElement.getNamespaceURI();
 			DatasourceProvider datasourceProvider = findDatasourceProvider(configNamespace);

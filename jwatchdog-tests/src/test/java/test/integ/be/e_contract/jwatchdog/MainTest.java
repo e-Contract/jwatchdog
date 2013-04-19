@@ -58,6 +58,28 @@ public class MainTest {
 	}
 
 	@Test
+	public void testJavascriptErrorLineNumber() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/test-jwatchdog-config-javascript-error-line-number.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
+	public void testDatasourceScriptErrorLineNumber() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/test-jwatchdog-config-datasource-script-error-line-number.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testWatchdogSkipTrigger() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-skip.xml");

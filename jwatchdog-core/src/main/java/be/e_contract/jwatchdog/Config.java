@@ -74,7 +74,6 @@ public class Config {
 			LOG.error("JAXB error: " + e.getMessage());
 			return;
 		}
-		LOG.debug("result type: " + result.getClass().getName());
 		JAXBElement<JwatchdogConfigType> jaxbElement = (JAXBElement<JwatchdogConfigType>) result;
 		this.jwatchdogConfig = jaxbElement.getValue();
 	}

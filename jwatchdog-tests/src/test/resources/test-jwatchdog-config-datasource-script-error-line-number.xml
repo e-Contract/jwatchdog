@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="false">
+	<datasource name="script">
+		<script:script xmlns:script="urn:be:e-contract:jwatchdog:datasource:script:1.0"
+			type="text/javascript">
+			<![CDATA[
+				foobar();
+			]]>
+		</script:script>
+	</datasource>
+	<notifier name="console">
+		<console:console xmlns:console="urn:be:e-contract:jwatchdog:notifier:console:1.0" />
+	</notifier>
+	<trigger description="Hello world" datasource="script"
+		notifier="console">
+		<condition>
+			<above value="2.5" />
+		</condition>
+	</trigger>
+</jwatchdog-config>
