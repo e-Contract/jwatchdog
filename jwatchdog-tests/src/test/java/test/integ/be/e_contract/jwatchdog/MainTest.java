@@ -47,6 +47,17 @@ public class MainTest {
 	}
 
 	@Test
+	public void testHelloWorld() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-helloworld.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
 	public void testWatchdogSkipTrigger() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-skip.xml");
@@ -203,6 +214,17 @@ public class MainTest {
 	public void testScriptDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-script.xml");
+		LOG.debug("config URL: " + configUrl);
+		String path = configUrl.toURI().getPath();
+		LOG.debug("path: " + path);
+		Main.main(new String[] { path });
+		LOG.debug("end");
+	}
+
+	@Test
+	public void testSchemaViolation() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/test-jwatchdog-config-schema-violation.xml");
 		LOG.debug("config URL: " + configUrl);
 		String path = configUrl.toURI().getPath();
 		LOG.debug("path: " + path);

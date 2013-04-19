@@ -18,12 +18,18 @@
 
 package be.e_contract.jwatchdog;
 
+import java.io.InputStream;
 import java.net.URL;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,6 +55,14 @@ public class Config {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		this.unmarshaller = jaxbContext.createUnmarshaller();
+		this.unmarshaller.setEventHandler(new WatchdogValidationEventHandler());
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		InputStream schemaInputStream = Config.class
+				.getResourceAsStream("/jwatchdog-config.xsd");
+		Source schemaSource = new StreamSource(schemaInputStream);
+		Schema schema = schemaFactory.newSchema(schemaSource);
+		unmarshaller.setSchema(schema);
 	}
 
 	public void reload() throws Exception {
