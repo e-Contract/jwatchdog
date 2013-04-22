@@ -7,6 +7,7 @@
 		<menu name="Overview">
 			<item name="Introduction" href="index.html" />
 			<item name="Advanced Settings" href="advanced-settings.html" />
+			<item name="Daemon" href="daemon.html" />
 		</menu>
 		<menu ref="modules" />
 		<menu ref="reports" />
