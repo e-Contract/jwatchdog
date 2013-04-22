@@ -89,7 +89,6 @@
 								<configuration>
 									<executable>rrdtool</executable>
 									<workingDirectory>${project.build.directory}</workingDirectory>
-
 								</configuration>
 							</execution>
 						</executions>
