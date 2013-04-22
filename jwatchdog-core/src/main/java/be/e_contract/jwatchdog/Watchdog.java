@@ -72,6 +72,15 @@ public class Watchdog {
 			LOG.debug("\tengine version: "
 					+ scriptEngineFactory.getEngineVersion());
 		}
+
+		Runtime runtime = Runtime.getRuntime();
+		runtime.addShutdownHook(new Thread() {
+
+			@Override
+			public void run() {
+				LOG.debug("jWatchdog shutdown");
+			}
+		});
 	}
 
 	public long guard() throws Exception {

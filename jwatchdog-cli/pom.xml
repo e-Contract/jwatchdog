@@ -71,6 +71,97 @@
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>attached-rpm</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<group>System Environment/Daemons</group>
+					<name>jwatchdog</name>
+					<summary>jWatchdog Daemon</summary>
+					<requires>
+						<require>java &gt;= 1.6.0</require>
+						<!-- Fedora 17: apache-commons-daemon-jsvc -->
+						<!-- CentOS 6: jakarta-commons-daemon-jsvc -->
+						<!-- <require>jakarta-commons-daemon-jsvc</require> -->
+					</requires>
+					<preinstallScriptlet>
+						<script>
+					        <![CDATA[
+/usr/bin/getent group jwatchdog >/dev/null || /usr/sbin/groupadd -r jwatchdog
+/usr/bin/getent passwd jwatchdog >/dev/null || /usr/sbin/useradd -r -g jwatchdog -d /usr/share/jwatchdog -s /bin/false jwatchdog
+					        ]]>
+						</script>
+					</preinstallScriptlet>
+					<postinstallScriptlet>
+						<script>
+					        <![CDATA[
+test -e /var/log/jwatchdog.log || {
+	touch /var/log/jwatchdog.log
+	chmod 0640 /var/log/jwatchdog.log
+	chown jwatchdog:jwatchdog /var/log/jwatchdog.log
+}
+					        ]]>
+						</script>
+					</postinstallScriptlet>
+					<mappings>
+						<mapping>
+							<directory>/usr/share/jwatchdog</directory>
+							<username>jwatchdog</username>
+							<groupname>jwatchdog</groupname>
+							<sources>
+								<source>
+									<location>target/jwatchdog-cli-${project.version}.jar</location>
+									<destination>jwatchdog-cli.jar</destination>
+								</source>
+								<source>
+									<location>src/main/rpm/log4j.xml</location>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/usr/share/jwatchdog/lib</directory>
+							<username>jwatchdog</username>
+							<groupname>jwatchdog</groupname>
+							<dependency />
+						</mapping>
+						<mapping>
+							<directory>/etc/init.d</directory>
+							<directoryIncluded>false</directoryIncluded>
+							<username>root</username>
+							<groupname>root</groupname>
+							<filemode>0755</filemode>
+							<sources>
+								<source>
+									<location>src/main/rpm/jwatchdog</location>
+									<destination>jwatchdog</destination>
+									<filter>true</filter>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/etc</directory>
+							<directoryIncluded>false</directoryIncluded>
+							<username>root</username>
+							<groupname>jwatchdog</groupname>
+							<configuration>noreplace</configuration>
+							<filemode>0640</filemode>
+							<sources>
+								<source>
+									<location>src/main/rpm/jwatchdog-config.xml</location>
+									<destination>jwatchdog-config.xml</destination>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -79,7 +79,7 @@
 			<fileMode>0400</fileMode>
 		</file>
 		<file>
-			<source>${basedir}/src/main/resources/log4j.xml</source>
+			<source>${basedir}/src/main/resources/default-log4j.xml</source>
 			<outputDirectory>config</outputDirectory>
 			<fileMode>0600</fileMode>
 		</file>

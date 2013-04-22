@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+#
+### BEGIN INIT INFO
+# Provides: jwatchdog
+# Defalt-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: jWatchdog init script
+### END INIT INFO
+
+. /etc/init.d/functions
+
+JSVC=`which jsvc`
+JWATCHDOG_HOME=/usr/share/jwatchdog
+JWATCHDOG_PIDFILE=/var/run/jwatchdog.pid
+JWATCHDOG_USER=jwatchdog
+
+start() {
+	echo -n "Starting jwatchdog: "
+	daemon $JSVC -cp $JWATCHDOG_HOME/lib/commons-daemon-${commons-daemon.version}.jar:$JWATCHDOG_HOME/jwatchdog-cli.jar -user $JWATCHDOG_USER -pidfile $JWATCHDOG_PIDFILE be.e_contract.jwatchdog.WatchdogDaemon /etc/jwatchdog-config.xml $JWATCHDOG_HOME/log4j.xml
+	RETVAL=$?
+	echo
+}
+
+stop() {
+	echo -n "Shutting down jwatchdog: "
+	killproc -p $JWATCHDOG_PIDFILE $JSVC
+	RETVAL=$?
+	echo
+}
+
+case "$1" in
+	start)
+		start
+	;;
+	stop)
+		stop
+	;;
+	status)
+		status -p $JWATCHDOG_PIDFILE $JSVC
+		RETVAL=$?
+	;;
+	restart)
+		stop
+		start
+	;;
+	*)
+		echo "Usage: {start|stop|status|restart}"
+		RETVAL=0
+esac
+exit $RETVAL

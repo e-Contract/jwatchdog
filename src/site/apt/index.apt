@@ -21,7 +21,7 @@ Usage
   Start the tool via:
   
 +--
-java -jar jwatchdog-cli-1.0.0-SNAPSHOT.one-jar.jar the_configuration_file.xml [log4j.xml]
+java -jar jwatchdog-cli-1.0.0-SNAPSHOT.jar the_configuration_file.xml [log4j.xml]
 +--
 
   Per default the tool will log in the file <<<jwatchdog.log>>>.

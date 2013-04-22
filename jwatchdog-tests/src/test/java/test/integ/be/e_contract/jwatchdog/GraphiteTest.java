@@ -43,4 +43,18 @@ public class GraphiteTest {
 			LOG.debug("value: " + value);
 		}
 	}
+
+	@Test
+	public void testHighLoads() throws Exception {
+		int count = 10000;
+		while (count > 0) {
+			count--;
+			GraphiteDatasource graphiteDatasource = new GraphiteDatasource(
+					"http://localhost:8080/render", "system.loadavg_1min");
+
+			graphiteDatasource.init(new WatchdogTestContext());
+			double[] result = graphiteDatasource.getValues(10);
+			assertNotNull(result);
+		}
+	}
 }
