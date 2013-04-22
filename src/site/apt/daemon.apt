@@ -1,3 +1,5 @@
 jWatchdog as daemon
 
-  jWatchdog implements the Apache Commons Daemon API.
+  jWatchdog implements the {{{http://commons.apache.org/proper/commons-daemon/}Apache Commons Daemon API}}.
+  
+  The projects also delivers RPMs targeting Fedora 17 and CentOS 6.

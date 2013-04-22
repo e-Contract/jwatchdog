@@ -25,6 +25,7 @@ import org.apache.commons.daemon.DaemonContext;
 import org.apache.commons.daemon.DaemonInitException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.xml.DOMConfigurator;
 
 public class WatchdogDaemon implements Daemon, Runnable {
 
@@ -49,6 +50,7 @@ public class WatchdogDaemon implements Daemon, Runnable {
 			Exception {
 		String[] arguments = context.getArguments();
 		File configFile = new File(arguments[0]);
+		DOMConfigurator.configure(arguments[1]);
 		this.watchdog = new Watchdog(configFile);
 		this.thread = new Thread(this);
 	}

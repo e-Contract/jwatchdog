@@ -19,6 +19,7 @@
 package be.e_contract.jwatchdog;
 
 import java.io.File;
+import java.net.URL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,6 +42,10 @@ public class Main {
 		if (args.length > 1) {
 			String logConfigFile = args[1];
 			DOMConfigurator.configure(logConfigFile);
+		} else {
+			// TODO: next file is defined in jwatchdog-cli.
+			URL configUrl = Main.class.getResource("/default-log4j.xml");
+			DOMConfigurator.configure(configUrl);
 		}
 
 		LOG.debug("jWatchdog");
