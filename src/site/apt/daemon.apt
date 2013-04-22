@@ -1,0 +1,3 @@
+jWatchdog as daemon
+
+  jWatchdog implements the Apache Commons Daemon API.

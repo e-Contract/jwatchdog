@@ -129,6 +129,10 @@
 			<artifactId>jaxb-impl</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>commons-daemon</groupId>
+			<artifactId>commons-daemon</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
