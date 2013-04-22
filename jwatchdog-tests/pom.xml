@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>be.e_contract.jwatchdog</groupId>
 		<artifactId>jwatchdog</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0.Beta3</version>
 	</parent>
 
 	<groupId>be.e_contract.jwatchdog</groupId>
 	<artifactId>jwatchdog-tests</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0.Beta3</version>
 	<packaging>jar</packaging>
 
 	<name>Java Watchdog Integration Tests</name>
@@ -82,67 +82,67 @@
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-datasource-rrd</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-datasource-static</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-datasource-script</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-datasource-graphite</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-twilio</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-spryng</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-console</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-mail</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-script</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-irc</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-file</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>be.e_contract.jwatchdog</groupId>
 			<artifactId>jwatchdog-notifier-desktop</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0.Beta3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.rrd4j</groupId>
