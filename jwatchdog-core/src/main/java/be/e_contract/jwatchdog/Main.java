@@ -30,12 +30,14 @@ public class Main {
 	private static final Log LOG = LogFactory.getLog(Main.class);
 
 	public static void main(String[] args) throws Exception {
+		Version version = new Version();
+
 		if (null == args) {
-			printUsage();
+			printUsage(version);
 			return;
 		}
 		if (args.length < 1) {
-			printUsage();
+			printUsage(version);
 			return;
 		}
 
@@ -50,7 +52,7 @@ public class Main {
 			DOMConfigurator.configure(configUrl);
 		}
 
-		LOG.debug("jWatchdog");
+		LOG.debug("jWatchdog " + version.getVersion());
 		File configFile = new File(args[0]);
 		if (!configFile.exists()) {
 			LOG.error("config file not found: " + configFile);
@@ -65,9 +67,10 @@ public class Main {
 		} while (sleep != -1);
 	}
 
-	private static void printUsage() {
-		System.out.println("jWatchdog");
-		System.out
-				.println("Usage: java -jar jwatchdog-cli-xxx.jar jwatchdog-config.xml [log4j.xml]");
+	private static void printUsage(Version version) {
+		System.out.println("jWatchdog " + version.getVersion());
+		System.out.println("Usage: java -jar jwatchdog-cli-"
+				+ version.getVersion()
+				+ ".jar jwatchdog-config.xml [log4j.xml]");
 	}
 }
