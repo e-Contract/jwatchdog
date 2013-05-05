@@ -11,3 +11,5 @@ Introduction
   original SMS message. After correct storage, the application alarms the
   user using the default configured ringtone. The end-user should acknowledge
   the reception of the jWatchdog notification to stop the alarm.
+  
+  The android client application is available via {{{https://play.google.com/store/apps/details?id=be.e_contract.jwatchdog.android}Google Play}}.
