@@ -255,6 +255,13 @@ public class MainTest {
 	}
 
 	@Test
+	public void testNotifierMail() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-notifier-mail.xml");
+		run(configUrl);
+	}
+
+	@Test
 	public void testNotifierDesktop() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-desktop.xml");

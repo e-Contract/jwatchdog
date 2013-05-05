@@ -18,48 +18,21 @@
 
 package be.e_contract.jwatchdog.notifier.file;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.file.jaxb.config.FileType;
 import be.e_contract.jwatchdog.notifier.file.jaxb.config.ObjectFactory;
 
-public class FileNotifierProvider implements NotifierProvider {
-
-	private final Unmarshaller unmarshaller;
+public class FileNotifierProvider extends AbstractNotifierProvider<FileType> {
 
 	public FileNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:file:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-file-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:file:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<FileType> fileConfigElement = (JAXBElement<FileType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		FileType fileConfig = fileConfigElement.getValue();
-		String file = fileConfig.getFile();
+	public Notifier loadNotifier(FileType config) throws Exception {
+		String file = config.getFile();
 		return new FileNotifier(file);
 	}
 }

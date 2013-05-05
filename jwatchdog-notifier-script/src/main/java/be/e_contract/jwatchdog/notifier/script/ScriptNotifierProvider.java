@@ -18,73 +18,23 @@
 
 package be.e_contract.jwatchdog.notifier.script;
 
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.Source;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
-import be.e_contract.jwatchdog.Config;
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.script.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.notifier.script.jaxb.config.ScriptType;
 
-public class ScriptNotifierProvider implements NotifierProvider {
-
-	private static final Log LOG = LogFactory
-			.getLog(ScriptNotifierProvider.class);
-
-	private final Unmarshaller unmarshaller;
+public class ScriptNotifierProvider extends
+		AbstractNotifierProvider<ScriptType> {
 
 	public ScriptNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-			SchemaFactory schemaFactory = SchemaFactory
-					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			InputStream schemaInputStream = Config.class
-					.getResourceAsStream("/jwatchdog-notifier-script-config.xsd");
-			Source schemaSource = new StreamSource(schemaInputStream);
-			Schema schema = schemaFactory.newSchema(schemaSource);
-			this.unmarshaller.setSchema(schema);
-		} catch (JAXBException e) {
-			LOG.error("JAXB error: " + e.getMessage(), e);
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		} catch (SAXException e) {
-			LOG.debug("SAX error: " + e.getMessage(), e);
-			throw new RuntimeException("SAX error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:script:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-script-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:script:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<ScriptType> scriptElement = (JAXBElement<ScriptType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		ScriptType scriptConfig = scriptElement.getValue();
-		String mimeType = scriptConfig.getType();
-		String script = scriptConfig.getValue();
+	public Notifier loadNotifier(ScriptType config) throws Exception {
+		String mimeType = config.getType();
+		String script = config.getValue();
 		return new ScriptNotifier(mimeType, script);
 	}
 }

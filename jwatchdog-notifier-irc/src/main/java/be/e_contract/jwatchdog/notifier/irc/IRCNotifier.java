@@ -57,7 +57,7 @@ public class IRCNotifier implements Notifier {
 		pircBotX.setName(this.name);
 		NotifierBot notifierBot = new NotifierBot(message);
 		pircBotX.getListenerManager().addListener(notifierBot);
-		LOG.debug("connecting to IRC server...");
+		LOG.debug("connecting to IRC server: " + this.server);
 		try {
 			pircBotX.connect(this.server);
 		} catch (NickAlreadyInUseException e) {
