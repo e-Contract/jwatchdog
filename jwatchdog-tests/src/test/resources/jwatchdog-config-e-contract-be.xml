@@ -137,7 +137,7 @@
 						
 						var avgValues = movingAverage(jwatchdog.values, 5);
 						for (idx = 0; idx < avgValues.length; idx++) {
-							if (avgValues[idx] > 1.0) {
+							if (avgValues[idx] > 2.0) {
 								jwatchdog.notifier.notify("eID IdP response time too high (avg)");	
 								return;
 							}
