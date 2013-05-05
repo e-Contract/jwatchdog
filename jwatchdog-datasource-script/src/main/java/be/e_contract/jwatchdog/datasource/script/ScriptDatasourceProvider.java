@@ -18,58 +18,32 @@
 
 package be.e_contract.jwatchdog.datasource.script;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Element;
 import org.xml.sax.Locator;
 
+import be.e_contract.jwatchdog.datasource.AbstractDatasourceProvider;
 import be.e_contract.jwatchdog.datasource.Datasource;
-import be.e_contract.jwatchdog.datasource.DatasourceProvider;
 import be.e_contract.jwatchdog.datasource.script.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.datasource.script.jaxb.config.ScriptType;
 
-public class ScriptDatasourceProvider implements DatasourceProvider {
+public class ScriptDatasourceProvider extends
+		AbstractDatasourceProvider<ScriptType> {
 
 	private static final Log LOG = LogFactory
 			.getLog(ScriptDatasourceProvider.class);
 
-	private final Unmarshaller unmarshaller;
-
 	public ScriptDatasourceProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:datasource:script:1.0",
+				ObjectFactory.class, "/jwatchdog-datasource-script-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:datasource:script:1.0");
-	}
-
-	@Override
-	public Datasource loadDatasource(Element configElement) throws Exception {
-		DOMSource domSource = new DOMSource(configElement);
-		JAXBElement<ScriptType> scriptElement = (JAXBElement<ScriptType>) this.unmarshaller
-				.unmarshal(domSource);
-		ScriptType scriptConfig = scriptElement.getValue();
-		Locator locator = scriptConfig.sourceLocation();
+	public Datasource loadDatasource(ScriptType config) throws Exception {
+		Locator locator = config.sourceLocation();
 		LOG.debug("script:script line number: " + locator.getLineNumber());
-		String mimeType = scriptConfig.getType();
-		String script = scriptConfig.getValue();
+		String mimeType = config.getType();
+		String script = config.getValue();
 		return new ScriptDatasource(mimeType, script);
 	}
 }
