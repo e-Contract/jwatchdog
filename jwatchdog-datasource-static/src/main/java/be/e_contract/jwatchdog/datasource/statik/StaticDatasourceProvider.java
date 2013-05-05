@@ -18,46 +18,21 @@
 
 package be.e_contract.jwatchdog.datasource.statik;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.datasource.AbstractDatasourceProvider;
 import be.e_contract.jwatchdog.datasource.Datasource;
-import be.e_contract.jwatchdog.datasource.DatasourceProvider;
 import be.e_contract.jwatchdog.datasource.statik.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.datasource.statik.jaxb.config.StaticType;
 
-public class StaticDatasourceProvider implements DatasourceProvider {
-
-	private final Unmarshaller unmarshaller;
+public class StaticDatasourceProvider extends
+		AbstractDatasourceProvider<StaticType> {
 
 	public StaticDatasourceProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:datasource:static:1.0",
+				ObjectFactory.class, "/jwatchdog-datasource-static-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections.singleton("urn:be:e-contract:jwatchdog:datasource:static:1.0");
-	}
-
-	@Override
-	public Datasource loadDatasource(Element configElement) throws Exception {
-		JAXBElement<StaticType> staticConfigElement = (JAXBElement<StaticType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		StaticType staticConfig = staticConfigElement.getValue();
-		return new StaticDatasource(staticConfig);
+	public Datasource loadDatasource(StaticType config) throws Exception {
+		return new StaticDatasource(config);
 	}
 }

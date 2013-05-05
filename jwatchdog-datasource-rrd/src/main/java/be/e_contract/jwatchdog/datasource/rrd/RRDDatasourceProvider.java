@@ -18,55 +18,29 @@
 
 package be.e_contract.jwatchdog.datasource.rrd;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Element;
 
+import be.e_contract.jwatchdog.datasource.AbstractDatasourceProvider;
 import be.e_contract.jwatchdog.datasource.Datasource;
-import be.e_contract.jwatchdog.datasource.DatasourceProvider;
 import be.e_contract.jwatchdog.datasource.rrd.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.datasource.rrd.jaxb.config.RrdType;
 
-public class RRDDatasourceProvider implements DatasourceProvider {
+public class RRDDatasourceProvider extends AbstractDatasourceProvider<RrdType> {
 
 	private static final Log LOG = LogFactory
 			.getLog(RRDDatasourceProvider.class);
 
-	private final Unmarshaller unmarshaller;
-
 	public RRDDatasourceProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:datasource:rrd:1.0",
+				ObjectFactory.class, "/jwatchdog-datasource-rrd-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:datasource:rrd:1.0");
-	}
-
-	@Override
-	public Datasource loadDatasource(Element configElement) throws Exception {
+	public Datasource loadDatasource(RrdType config) throws Exception {
 		LOG.debug("loading datasource");
-		JAXBElement<RrdType> rrdElement = (JAXBElement<RrdType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		RrdType rrdConfig = rrdElement.getValue();
-		String rrdFilename = rrdConfig.getFile();
-		String datasourceName = rrdConfig.getDataSourceName();
+		String rrdFilename = config.getFile();
+		String datasourceName = config.getDataSourceName();
 		return new RRDDatasource(rrdFilename, datasourceName);
 	}
 }
