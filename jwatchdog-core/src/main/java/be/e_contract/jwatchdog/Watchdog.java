@@ -50,6 +50,8 @@ public class Watchdog {
 
 	private final File configFile;
 
+	private final HeartBeat heartBeat;
+
 	public Watchdog(File configFile) {
 		this.configFile = configFile;
 
@@ -73,6 +75,8 @@ public class Watchdog {
 					+ scriptEngineFactory.getEngineVersion());
 		}
 
+		this.heartBeat = new HeartBeat();
+
 		Runtime runtime = Runtime.getRuntime();
 		runtime.addShutdownHook(new Thread() {
 
@@ -84,7 +88,7 @@ public class Watchdog {
 	}
 
 	public long guard() throws Exception {
-		Config config = new Config(configFile.toURI().toURL());
+		Config config = new Config(this.configFile.toURI().toURL());
 		config.reload();
 		JwatchdogConfigType watchdogConfig = config.getConfig();
 		Integer sleepMinutes;
@@ -104,6 +108,7 @@ public class Watchdog {
 					watchdogConfig.getNotifierGroup());
 			Map<String, Set<Notifier>> notifiers = notifierFactory
 					.loadNotifiers(context);
+			this.heartBeat.reconfig(watchdogConfig.getHeartbeat(), notifiers);
 			List<TriggerType> triggerConfigs = watchdogConfig.getTrigger();
 			String notificationPrefix = watchdogConfig.getNotificationPrefix();
 			executeTriggers(sleepMinutes, datasources, notifiers,

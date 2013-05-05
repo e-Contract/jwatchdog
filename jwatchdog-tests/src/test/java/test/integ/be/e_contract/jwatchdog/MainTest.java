@@ -39,120 +39,93 @@ public class MainTest {
 	public void testWatchdog() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-test.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testHelloWorld() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-helloworld.xml");
+		run(configUrl);
+	}
+
+	private void run(URL configUrl) throws Exception {
 		LOG.debug("config URL: " + configUrl);
 		String path = configUrl.toURI().getPath();
 		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
+		URL logUrl = MainTest.class.getResource("/log4j.xml");
+		String logPath = logUrl.toURI().getPath();
+		Main.main(new String[] { path, logPath });
 		LOG.debug("end");
+	}
+
+	@Test
+	public void testHeartbeat() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-heartbeat.xml");
+		run(configUrl);
 	}
 
 	@Test
 	public void testJavascriptErrorLineNumber() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-javascript-error-line-number.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testDatasourceScriptErrorLineNumber() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-datasource-script-error-line-number.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testWatchdogSkipTrigger() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-skip.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testWatchdogProxy() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-proxy.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testExpression() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-expression.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testUnknownDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-unknown-datasource.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testUnknownNotifier() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-unknown-notifier.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testInvalidConfig() throws Exception {
 		URL configUrl = MainTest.class.getResource("/log4j.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testJavascript() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-javascript.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
@@ -173,164 +146,104 @@ public class MainTest {
 	public void testJavascriptAverage() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-javascript-average.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testNotifierGroup() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-group.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testScriptNotifier() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-script.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testScriptNotifierRuby() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-script-ruby.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testScriptNotifierGroovy() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-script-groovy.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testScriptNotifierPython() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-script-python.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testNotifierIRC() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-irc.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testScriptDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-script.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testSchemaViolation() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-schema-violation.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testRRDDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-rrd.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testGraphiteDatasource() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-datasource-graphite.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testGraphiteDatasourceInvalidTarget() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-datasource-graphite-invalid-target.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testNotifierSpryng() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-spryng.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testNotifierFile() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-file.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 
 	@Test
 	public void testNotifierDesktop() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/jwatchdog-config-notifier-desktop.xml");
-		LOG.debug("config URL: " + configUrl);
-		String path = configUrl.toURI().getPath();
-		LOG.debug("path: " + path);
-		Main.main(new String[] { path });
-		LOG.debug("end");
+		run(configUrl);
 	}
 }

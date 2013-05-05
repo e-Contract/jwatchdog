@@ -49,6 +49,9 @@ Advanced Settings
 	...
 </jwatchdog-config>
 +--
+
+  When you have an error in a trigger script, the jWatchdog log file will also display
+  the exact line number within the XML file on which the script error occurred.
   
 * Proxy settings
 
@@ -80,3 +83,15 @@ Advanced Settings
 	...
 </jwatchdog-config>
 +--
+
+* Heartbeat
+
+  The jWatchdog support a cron based heartbeat mechanism.
+  Example configuration:
+  
++--
+<heartbeat cron="0/5 * * * * ?" message="heartbeat" notifier="heartbeat-notifier" />
++--
+
+  This example will send the <<<message>>> to the given <<<notifier>>> every 5 seconds.
+  We use a {{{http://quartz-scheduler.org/}Quartz}} cron scheduler as implementation. 
