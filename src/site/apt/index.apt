@@ -15,6 +15,8 @@ Download
 
   The jWatchdog distribution can be downloaded from {{{http://code.google.com/p/jwatchdog/downloads/list}Google Code}}.
 
+  The android client application is available via {{{https://play.google.com/store/apps/details?id=be.e_contract.jwatchdog.android}Google Play}}.
+
 Usage
 
   The jWatchdog tool is delivered as a command line tool including all required dependencies.
