@@ -72,6 +72,10 @@ public class DatasourceFactory {
 				datasources.put(name, datasource);
 			} catch (Exception e) {
 				LOG.error("error loading data source: " + e.getMessage());
+				Throwable cause = e.getCause();
+				if (null != cause) {
+					LOG.error("cause: " + cause.getMessage());
+				}
 			}
 		}
 		return datasources;

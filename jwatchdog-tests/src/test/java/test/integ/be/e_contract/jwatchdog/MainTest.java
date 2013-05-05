@@ -74,6 +74,20 @@ public class MainTest {
 	}
 
 	@Test
+	public void testScriptMissingType() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/test-jwatchdog-config-script-missing-type.xml");
+		run(configUrl);
+	}
+
+	@Test
+	public void testNotifierScriptMissingType() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/test-jwatchdog-config-notifier-script-missing-type.xml");
+		run(configUrl);
+	}
+
+	@Test
 	public void testDatasourceScriptErrorLineNumber() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-datasource-script-error-line-number.xml");

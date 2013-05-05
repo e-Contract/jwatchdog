@@ -78,6 +78,10 @@ public class NotifierFactory {
 				notifiers.put(name, Collections.singleton(notifier));
 			} catch (Exception e) {
 				LOG.error("error loading notifier: " + e.getMessage());
+				Throwable cause = e.getCause();
+				if (null != cause) {
+					LOG.error("cause: " + cause.getMessage());
+				}
 			}
 		}
 		for (NotifierGroupType notifierGroup : this.notifierGroupConfigs) {

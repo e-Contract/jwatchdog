@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jwatchdog-config xmlns="urn:be:e-contract:jwatchdog:1.0"
+	sleep="1" loop="true">
+	<datasource name="static">
+		<static:static xmlns:static="urn:be:e-contract:jwatchdog:datasource:static:1.0">
+			<static:value>1.0</static:value>
+			<static:value>2.0</static:value>
+			<static:value>3.0</static:value>
+		</static:static>
+	</datasource>
+	<notifier name="script">
+		<script:script xmlns:script="urn:be:e-contract:jwatchdog:notifier:script:1.0">
+			jwatchdog.log.debug("javascript debug logging");
+			println("javascript says: " + jwatchdog.message);
+		</script:script>
+	</notifier>
+	<trigger description="Hello world" datasource="static"
+		notifier="script">
+		<condition>
+			<above value="2.5" />
+		</condition>
+	</trigger>
+</jwatchdog-config>

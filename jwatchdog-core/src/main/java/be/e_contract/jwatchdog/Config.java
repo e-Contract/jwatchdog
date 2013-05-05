@@ -62,7 +62,7 @@ public class Config {
 				.getResourceAsStream("/jwatchdog-config.xsd");
 		Source schemaSource = new StreamSource(schemaInputStream);
 		Schema schema = schemaFactory.newSchema(schemaSource);
-		unmarshaller.setSchema(schema);
+		this.unmarshaller.setSchema(schema);
 	}
 
 	public void reload() throws Exception {
