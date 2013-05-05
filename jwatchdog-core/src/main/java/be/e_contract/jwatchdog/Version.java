@@ -16,38 +16,30 @@
  * http://www.gnu.org/licenses/.
  */
 
-package test.unit.be.e_contract.jwatchdog;
+package be.e_contract.jwatchdog;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-import java.net.URL;
+public class Version {
 
-import org.junit.Test;
+	private final String version;
 
-import be.e_contract.jwatchdog.Config;
-
-public class ConfigTest {
-
-	@Test
-	public void testMissingParameter() throws Exception {
-		// operate & verify
+	public Version() {
+		Properties properties = new Properties();
+		InputStream inputStream = Version.class
+				.getResourceAsStream("application.properties");
 		try {
-			new Config(null);
-			fail();
-		} catch (IllegalArgumentException e) {
-			// expected
+			properties.load(inputStream);
+		} catch (IOException e) {
+			this.version = "unknown";
+			return;
 		}
+		this.version = properties.getProperty("version");
 	}
 
-	@Test
-	public void testLoadEmptyConfig() throws Exception {
-		// setup
-		URL testConfig = ConfigTest.class
-				.getResource("/jwatchdog-config-test.xml");
-		assertNotNull(testConfig);
-
-		// operate
-		new Config(testConfig);
+	public String getVersion() {
+		return this.version;
 	}
 }
