@@ -18,51 +18,25 @@
 
 package be.e_contract.jwatchdog.notifier.twilio;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.twilio.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.notifier.twilio.jaxb.config.TwilioType;
 
-public class TwilioNotifierProvider implements NotifierProvider {
-
-	private final Unmarshaller unmarshaller;
+public class TwilioNotifierProvider extends
+		AbstractNotifierProvider<TwilioType> {
 
 	public TwilioNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:twilio:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-twilio-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:twilio:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<TwilioType> twilioElement = (JAXBElement<TwilioType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		TwilioType twilioConfig = twilioElement.getValue();
-		String account = twilioConfig.getAccount();
-		String token = twilioConfig.getToken();
-		String to = twilioConfig.getTo();
-		String from = twilioConfig.getFrom();
+	public Notifier loadNotifier(TwilioType config) throws Exception {
+		String account = config.getAccount();
+		String token = config.getToken();
+		String to = config.getTo();
+		String from = config.getFrom();
 		return new TwilioNotifier(account, token, to, from);
 	}
 }

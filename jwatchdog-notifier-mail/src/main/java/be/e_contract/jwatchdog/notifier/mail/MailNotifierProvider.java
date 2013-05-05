@@ -18,50 +18,23 @@
 
 package be.e_contract.jwatchdog.notifier.mail;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.mail.jaxb.config.MailType;
 import be.e_contract.jwatchdog.notifier.mail.jaxb.config.ObjectFactory;
 
-public class MailNotifierProvider implements NotifierProvider {
-
-	private final Unmarshaller unmarshaller;
+public class MailNotifierProvider extends AbstractNotifierProvider<MailType> {
 
 	public MailNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:mail:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-mail-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:mail:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<MailType> mailElement = (JAXBElement<MailType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		MailType mailConfig = mailElement.getValue();
-		String smtpServer = mailConfig.getSmtpServer();
-		String from = mailConfig.getFrom();
-		String to = mailConfig.getTo();
+	public Notifier loadNotifier(MailType config) throws Exception {
+		String smtpServer = config.getSmtpServer();
+		String from = config.getFrom();
+		String to = config.getTo();
 		return new MailNotifier(smtpServer, from, to);
 	}
 }

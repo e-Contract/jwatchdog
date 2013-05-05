@@ -18,51 +18,25 @@
 
 package be.e_contract.jwatchdog.notifier.spryng;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.spryng.jaxb.config.ObjectFactory;
 import be.e_contract.jwatchdog.notifier.spryng.jaxb.config.SpryngType;
 
-public class SpryngNotifierProvider implements NotifierProvider {
-
-	private final Unmarshaller unmarshaller;
+public class SpryngNotifierProvider extends
+		AbstractNotifierProvider<SpryngType> {
 
 	public SpryngNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:spryng:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-spryng-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:spryng:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<SpryngType> spryngElement = (JAXBElement<SpryngType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		SpryngType spryngConfig = spryngElement.getValue();
-		String username = spryngConfig.getUsername();
-		String password = spryngConfig.getPassword();
-		String destination = spryngConfig.getDestination();
-		String sender = spryngConfig.getSender();
+	public Notifier loadNotifier(SpryngType config) throws Exception {
+		String username = config.getUsername();
+		String password = config.getPassword();
+		String destination = config.getDestination();
+		String sender = config.getSender();
 		SpryngNotifier notifier = new SpryngNotifier(username, password,
 				destination, sender);
 		return notifier;

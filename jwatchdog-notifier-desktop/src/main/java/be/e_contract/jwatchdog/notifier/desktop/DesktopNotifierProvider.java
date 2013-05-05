@@ -18,48 +18,22 @@
 
 package be.e_contract.jwatchdog.notifier.desktop;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.dom.DOMSource;
-
-import org.w3c.dom.Element;
-
+import be.e_contract.jwatchdog.notifier.AbstractNotifierProvider;
 import be.e_contract.jwatchdog.notifier.Notifier;
-import be.e_contract.jwatchdog.notifier.NotifierProvider;
 import be.e_contract.jwatchdog.notifier.desktop.jaxb.config.DesktopType;
 import be.e_contract.jwatchdog.notifier.desktop.jaxb.config.ObjectFactory;
 
-public class DesktopNotifierProvider implements NotifierProvider {
-
-	private final Unmarshaller unmarshaller;
+public class DesktopNotifierProvider extends
+		AbstractNotifierProvider<DesktopType> {
 
 	public DesktopNotifierProvider() {
-		try {
-			JAXBContext jaxbContext = JAXBContext
-					.newInstance(ObjectFactory.class);
-			this.unmarshaller = jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
-			throw new RuntimeException("JAXB error: " + e.getMessage());
-		}
+		super("urn:be:e-contract:jwatchdog:notifier:desktop:1.0",
+				ObjectFactory.class, "/jwatchdog-notifier-desktop-config.xsd");
 	}
 
 	@Override
-	public Set<String> getConfigNamespaces() {
-		return Collections
-				.singleton("urn:be:e-contract:jwatchdog:notifier:desktop:1.0");
-	}
-
-	@Override
-	public Notifier loadNotifier(Element configElement) throws Exception {
-		JAXBElement<DesktopType> desktopConfigElement = (JAXBElement<DesktopType>) this.unmarshaller
-				.unmarshal(new DOMSource(configElement));
-		DesktopType desktopConfig = desktopConfigElement.getValue();
-		String title = desktopConfig.getTitle();
+	public Notifier loadNotifier(DesktopType config) throws Exception {
+		String title = config.getTitle();
 		return new DesktopNotifier(title);
 	}
 }

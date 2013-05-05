@@ -52,9 +52,10 @@ public class NotifierBot extends ListenerAdapter<PircBotX> {
 
 	@Override
 	public void onJoin(JoinEvent<PircBotX> event) throws Exception {
-		LOG.debug("joined");
 		PircBotX pircBotX = event.getBot();
 		Channel channel = event.getChannel();
+		LOG.debug("joined: " + channel.getName());
+		LOG.debug("sending message: " + this.message);
 		pircBotX.sendMessage(channel, this.message);
 		pircBotX.disconnect();
 	}
