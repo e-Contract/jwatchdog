@@ -43,8 +43,10 @@ public class Main {
 			String logConfigFile = args[1];
 			DOMConfigurator.configure(logConfigFile);
 		} else {
-			// TODO: next file is defined in jwatchdog-cli.
 			URL configUrl = Main.class.getResource("/default-log4j.xml");
+			if (null == configUrl) {
+				throw new RuntimeException("/default-log4j.xml not found");
+			}
 			DOMConfigurator.configure(configUrl);
 		}
 

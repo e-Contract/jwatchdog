@@ -14,6 +14,7 @@
 			<element name="notifier-group" type="tns:notifier-group-type"
 				maxOccurs="unbounded" minOccurs="0" />
 			<element name="trigger" type="tns:trigger-type" maxOccurs="unbounded" />
+			<element name="heartbeat" type="tns:heartbeat" minOccurs="0" />
 		</sequence>
 		<attribute name="sleep" type="xs:int" use="required">
 			<annotation>
@@ -171,6 +172,12 @@
 					default="false" />
 			</extension>
 		</simpleContent>
+	</complexType>
+
+	<complexType name="heartbeat">
+		<attribute name="cron" type="xs:string" use="required" />
+		<attribute name="notifier" type="xs:string" use="required" />
+		<attribute name="message" type="xs:string" use="required" />
 	</complexType>
 
 </schema>
