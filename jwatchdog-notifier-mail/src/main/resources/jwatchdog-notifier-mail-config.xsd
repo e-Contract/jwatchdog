@@ -7,13 +7,20 @@
 	<element name="mail" type="tns:mail-type" />
 
 	<complexType name="mail-type">
-		<attribute name="from" type="xs:string" use="required"/>
-		<attribute name="to" type="xs:string" use="required"/>
+		<attribute name="from" type="xs:string" use="required" />
+		<attribute name="to" type="xs:string" use="required" />
 		<attribute name="smtpServer" type="xs:string" use="required">
 			<annotation>
 				<documentation>
 					The location of the SMTP server used to send email
 					notifications.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="priority" type="xs:int" use="optional">
+			<annotation>
+				<documentation>
+					If present, will be used as X-Priority header.
 				</documentation>
 			</annotation>
 		</attribute>

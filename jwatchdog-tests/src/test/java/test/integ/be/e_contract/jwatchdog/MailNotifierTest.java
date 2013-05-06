@@ -27,7 +27,7 @@ public class MailNotifierTest {
 	@Test
 	public void testMail() throws Exception {
 		MailNotifier mailNotifier = new MailNotifier("smtp.telenet.be",
-				"info@e-contract.be", "info@e-contract.be");
+				"info@e-contract.be", "info@e-contract.be", 2);
 
 		mailNotifier.notify("hello world");
 	}
