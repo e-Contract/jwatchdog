@@ -10,7 +10,8 @@
 	</datasource>
 	<notifier name="mail">
 		<mail:mail xmlns:mail="urn:be:e-contract:jwatchdog:notifier:mail:1.0"
-			smtpServer="smtp.telenet.be" from="info@e-contract.be" to="info@e-contract.be" />
+			smtpServer="smtp.telenet.be" from="info@e-contract.be" to="info@e-contract.be"
+			priority="1" />
 	</notifier>
 	<trigger description="Hello world" datasource="static"
 		notifier="mail">

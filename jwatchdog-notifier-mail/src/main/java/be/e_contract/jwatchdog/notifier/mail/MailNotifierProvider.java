@@ -35,6 +35,7 @@ public class MailNotifierProvider extends AbstractNotifierProvider<MailType> {
 		String smtpServer = config.getSmtpServer();
 		String from = config.getFrom();
 		String to = config.getTo();
-		return new MailNotifier(smtpServer, from, to);
+		Integer priority = config.getPriority();
+		return new MailNotifier(smtpServer, from, to, priority);
 	}
 }

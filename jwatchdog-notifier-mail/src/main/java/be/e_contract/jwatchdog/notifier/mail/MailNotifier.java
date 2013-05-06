@@ -46,10 +46,14 @@ public class MailNotifier implements Notifier {
 
 	private final String smtpServer;
 
-	public MailNotifier(String smtpServer, String from, String to) {
+	private final Integer priority;
+
+	public MailNotifier(String smtpServer, String from, String to,
+			Integer priority) {
 		this.smtpServer = smtpServer;
 		this.from = from;
 		this.to = to;
+		this.priority = priority;
 	}
 
 	@Override
@@ -73,6 +77,10 @@ public class MailNotifier implements Notifier {
 			mimeMessage.setRecipients(RecipientType.TO, this.to);
 			mimeMessage.setSubject(message);
 			mimeMessage.setSentDate(new Date());
+
+			if (null != this.priority) {
+				mimeMessage.setHeader("X-Priority", this.priority.toString());
+			}
 
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
 			mimeBodyPart.setText(message);

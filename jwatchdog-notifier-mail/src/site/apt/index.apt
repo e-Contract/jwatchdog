@@ -15,6 +15,9 @@ Usage
 </notifier>
 +--
 
+  The optional <<<priority>>> attribute can be used to set email priority.
+  Priority value ranges from 1 (highest) to 5 (lowest).
+
 XML Schema
 
   {{{./schema/jwatchdog-notifier-mail-config.xsd}jWatchdog Mail Notifier XML Schema}}
