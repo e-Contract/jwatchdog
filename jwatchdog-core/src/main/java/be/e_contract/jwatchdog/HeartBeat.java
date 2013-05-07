@@ -49,8 +49,6 @@ public class HeartBeat {
 
 	private String currentMessage;
 
-	private String currentNotifier;
-
 	private JobDataMap jobDataMap;
 
 	private Scheduler scheduler;
@@ -67,7 +65,6 @@ public class HeartBeat {
 				this.currentTrigger = null;
 				this.scheduler = null;
 				this.currentMessage = null;
-				this.currentNotifier = null;
 				this.jobDataMap = null;
 				this.jobDetail = null;
 			}
@@ -100,7 +97,6 @@ public class HeartBeat {
 					cronScheduleBuilder).build();
 			this.currentCron = cron;
 			this.currentMessage = message;
-			this.currentNotifier = notifier;
 
 			this.scheduler.scheduleJob(this.jobDetail, this.currentTrigger);
 
@@ -121,14 +117,14 @@ public class HeartBeat {
 				this.currentTrigger = trigger;
 				this.currentCron = cron;
 			}
-			if (false == this.currentMessage.equals(message)
-					|| false == this.currentNotifier.equals(notifier)) {
+			if (false == this.currentMessage.equals(message)) {
 				this.jobDataMap.put(HeartbeatJob.MESSAGE_JOB_DATA, message);
-				Set<Notifier> notifierSet = notifiers.get(notifier);
-				this.jobDataMap.put(HeartbeatJob.NOTIFIER_SET_JOB_DATA,
-						notifierSet);
-				this.scheduler.addJob(this.jobDetail, true);
+				this.currentMessage = message;
 			}
+			Set<Notifier> notifierSet = notifiers.get(notifier);
+			this.jobDataMap
+					.put(HeartbeatJob.NOTIFIER_SET_JOB_DATA, notifierSet);
+			this.scheduler.addJob(this.jobDetail, true);
 		}
 	}
 }
