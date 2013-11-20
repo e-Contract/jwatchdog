@@ -11,7 +11,7 @@ The source code is hosted at: http://code.google.com/p/jwatchdog/
 
 The following is required for compiling the project:
 * Oracle Java 1.6.0+
-* Apache Maven 3.0.4
+* Apache Maven 3.1.1
 * Android SDK with API version 4
 
 
