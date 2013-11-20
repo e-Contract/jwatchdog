@@ -32,13 +32,15 @@ import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import be.e_contract.jwatchdog.Context;
+import be.e_contract.jwatchdog.Credential;
 import be.e_contract.jwatchdog.ProxyConfig;
 import be.e_contract.jwatchdog.datasource.Datasource;
 
@@ -52,16 +54,19 @@ public class GraphiteDatasource implements Datasource {
 
 	private final String target;
 
+	private final String credentialName;
+
 	private Context context;
 
-	public GraphiteDatasource(String url, String target) {
+	public GraphiteDatasource(String url, String target, String credentialName) {
 		this.url = url;
 		this.target = target;
+		this.credentialName = credentialName;
 	}
 
 	@Override
 	public double[] getValues(int minutes) {
-		HttpClient httpClient = new DefaultHttpClient();
+		DefaultHttpClient httpClient = new DefaultHttpClient();
 		URL urlUrl;
 		try {
 			urlUrl = new URL(this.url);
@@ -76,6 +81,16 @@ public class GraphiteDatasource implements Datasource {
 					proxyConfig.getPort());
 			httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
 					proxyHost);
+		}
+
+		if (null != this.credentialName) {
+			Credential credential = this.context.getCredential(credentialName);
+			LOG.debug("setting credential for " + urlUrl.getHost() + ":"
+					+ urlUrl.getPort());
+			httpClient.getCredentialsProvider().setCredentials(
+					new AuthScope(urlUrl.getHost(), urlUrl.getPort()),
+					new UsernamePasswordCredentials(credential.getUsername(),
+							credential.getPassword()));
 		}
 
 		HttpGet httpGet;

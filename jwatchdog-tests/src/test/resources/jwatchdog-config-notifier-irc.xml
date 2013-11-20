@@ -10,7 +10,7 @@
 	</datasource>
 	<notifier name="irc">
 		<irc:irc xmlns:irc="urn:be:e-contract:jwatchdog:notifier:irc:1.0"
-			server="irc.freenode.net" name="jwatchdog" channel="#jwatchdog" />
+			server="irc.freenode.net" name="jwatchdog2" channel="#jwatchdog" />
 	</notifier>
 	<trigger description="Hello world" datasource="static"
 		notifier="irc">

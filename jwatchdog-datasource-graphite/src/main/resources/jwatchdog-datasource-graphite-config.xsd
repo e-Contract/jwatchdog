@@ -23,6 +23,14 @@
 				</documentation>
 			</annotation>
 		</attribute>
+		<attribute name="credential" type="xs:string" use="optional">
+			<annotation>
+				<documentation>
+					The optional name of the credential to be used for
+					connecting to the Graphite endpoint.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 
 </schema>

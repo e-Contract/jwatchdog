@@ -34,4 +34,12 @@ public interface Context {
 	 * @return
 	 */
 	ProxyConfig getProxyConfig(String protocol);
+
+	/**
+	 * Gives back the credential for the given name.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	Credential getCredential(String name);
 }

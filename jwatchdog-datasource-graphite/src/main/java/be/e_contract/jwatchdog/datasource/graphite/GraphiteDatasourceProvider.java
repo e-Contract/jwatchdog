@@ -36,6 +36,7 @@ public class GraphiteDatasourceProvider extends
 	public Datasource loadDatasource(GraphiteType config) throws Exception {
 		String url = config.getUrl();
 		String target = config.getTarget();
-		return new GraphiteDatasource(url, target);
+		String credentialName = config.getCredential();
+		return new GraphiteDatasource(url, target, credentialName);
 	}
 }

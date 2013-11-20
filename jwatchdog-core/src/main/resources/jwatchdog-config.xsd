@@ -46,6 +46,8 @@
 	<complexType name="settings-type">
 		<sequence>
 			<element name="proxies" type="tns:proxies-type" minOccurs="0" />
+			<element name="credentials" type="tns:credentials-type"
+				minOccurs="0" />
 		</sequence>
 	</complexType>
 
@@ -59,6 +61,19 @@
 		<attribute name="protocol" type="xs:string" use="required" />
 		<attribute name="host" type="xs:string" use="required" />
 		<attribute name="port" type="xs:int" use="required" />
+	</complexType>
+
+	<complexType name="credentials-type">
+		<sequence>
+			<element name="credential" type="tns:credential-type"
+				maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="credential-type">
+		<attribute name="name" type="xs:ID" use="required" />
+		<attribute name="username" type="xs:string" use="required" />
+		<attribute name="password" type="xs:string" use="required" />
 	</complexType>
 
 	<complexType name="datasource-type">

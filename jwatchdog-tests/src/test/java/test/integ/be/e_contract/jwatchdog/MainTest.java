@@ -234,6 +234,13 @@ public class MainTest {
 	}
 
 	@Test
+	public void testGraphiteDatasource_eContract() throws Exception {
+		URL configUrl = MainTest.class
+				.getResource("/jwatchdog-config-datasource-graphite-e-contract.xml");
+		run(configUrl);
+	}
+
+	@Test
 	public void testGraphiteDatasourceInvalidTarget() throws Exception {
 		URL configUrl = MainTest.class
 				.getResource("/test-jwatchdog-config-datasource-graphite-invalid-target.xml");
