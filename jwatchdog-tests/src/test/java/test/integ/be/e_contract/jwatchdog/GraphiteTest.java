@@ -33,7 +33,7 @@ public class GraphiteTest {
 	@Test
 	public void testGraphiteREST() throws Exception {
 		GraphiteDatasource graphiteDatasource = new GraphiteDatasource(
-				"http://localhost:8080/render", "system.loadavg_1min");
+				"http://localhost:8080/render", "system.loadavg_1min", null);
 
 		graphiteDatasource.init(new WatchdogTestContext());
 		double[] result = graphiteDatasource.getValues(10);
@@ -50,7 +50,7 @@ public class GraphiteTest {
 		while (count > 0) {
 			count--;
 			GraphiteDatasource graphiteDatasource = new GraphiteDatasource(
-					"http://localhost:8080/render", "system.loadavg_1min");
+					"http://localhost:8080/render", "system.loadavg_1min", null);
 
 			graphiteDatasource.init(new WatchdogTestContext());
 			double[] result = graphiteDatasource.getValues(10);

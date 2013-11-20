@@ -16,21 +16,24 @@
  * http://www.gnu.org/licenses/.
  */
 
-package test.integ.be.e_contract.jwatchdog;
+package be.e_contract.jwatchdog;
 
-import be.e_contract.jwatchdog.Context;
-import be.e_contract.jwatchdog.Credential;
-import be.e_contract.jwatchdog.ProxyConfig;
+public class Credential {
 
-public class WatchdogTestContext implements Context {
+	private final String username;
 
-	@Override
-	public ProxyConfig getProxyConfig(String protocol) {
-		return null;
+	private final String password;
+
+	public Credential(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
-	@Override
-	public Credential getCredential(String name) {
-		return null;
+	public String getUsername() {
+		return this.username;
+	}
+
+	public String getPassword() {
+		return this.password;
 	}
 }
