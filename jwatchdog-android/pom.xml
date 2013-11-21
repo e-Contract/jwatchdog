@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>be.e_contract.jwatchdog</groupId>
 		<artifactId>jwatchdog</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>jwatchdog-android</artifactId>
