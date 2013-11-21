@@ -94,4 +94,20 @@ Advanced Settings
 +--
 
   This example will send the <<<message>>> to the given <<<notifier>>> every 5 seconds.
-  We use a {{{http://quartz-scheduler.org/}Quartz}} cron scheduler as implementation. 
+  We use a {{{http://quartz-scheduler.org/}Quartz}} cron scheduler as implementation.
+  
+* Credentials
+
+  Some plugins might require credentials for authentication towards the services they consume.
+  Example configuration:
+  
++---
+<settings>
+	<credentials>
+		<credential name="name-of-the-credential" username="username-here"
+			password="password-here" />
+	</credentials>
+</settings>
++---
+
+  In this example, plugins can refer to the credential via <<<name-of-the-credential>>>.
