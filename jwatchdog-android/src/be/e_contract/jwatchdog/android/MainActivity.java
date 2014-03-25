@@ -42,6 +42,8 @@ public class MainActivity extends FragmentActivity {
 
 	private MediaPlayer mediaPlayer;
 
+	private AlertDialog alertDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -95,10 +97,12 @@ public class MainActivity extends FragmentActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						stopMediaPlayer();
+						dialog.dismiss();
+						MainActivity.this.alertDialog = null;
 					}
 				});
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.show();
+		this.alertDialog = alertDialogBuilder.create();
+		this.alertDialog.show();
 	}
 
 	@Override
@@ -114,8 +118,18 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onStop() {
+		if (null != this.alertDialog && this.alertDialog.isShowing()) {
+			this.alertDialog.dismiss();
+			this.alertDialog = null;
+		}
+		super.onStop();
+	}
+
+	@Override
 	protected void onDestroy() {
 		stopMediaPlayer();
+
 		super.onDestroy();
 	}
 
