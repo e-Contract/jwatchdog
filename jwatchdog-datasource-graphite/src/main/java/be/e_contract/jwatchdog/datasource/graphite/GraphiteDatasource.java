@@ -1,6 +1,6 @@
 /*
  * Java Watchdog Project.
- * Copyright (C) 2013 Frank Cornelis.
+ * Copyright (C) 2013-2014 Frank Cornelis.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -34,10 +34,17 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.Credential;
@@ -66,7 +73,8 @@ public class GraphiteDatasource implements Datasource {
 
 	@Override
 	public double[] getValues(int minutes) {
-		DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+		CloseableHttpClient httpClient = httpClientBuilder.build();
 		URL urlUrl;
 		try {
 			urlUrl = new URL(this.url);
@@ -83,14 +91,24 @@ public class GraphiteDatasource implements Datasource {
 					proxyHost);
 		}
 
+		HttpClientContext context = HttpClientContext.create();
+
 		if (null != this.credentialName) {
 			Credential credential = this.context.getCredential(credentialName);
 			LOG.debug("setting credential for " + urlUrl.getHost() + ":"
 					+ urlUrl.getPort());
-			httpClient.getCredentialsProvider().setCredentials(
-					new AuthScope(urlUrl.getHost(), urlUrl.getPort()),
-					new UsernamePasswordCredentials(credential.getUsername(),
-							credential.getPassword()));
+			CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+			credentialsProvider.setCredentials(new AuthScope(urlUrl.getHost(),
+					urlUrl.getPort()), new UsernamePasswordCredentials(
+					credential.getUsername(), credential.getPassword()));
+
+			HttpHost targetHost = new HttpHost(urlUrl.getHost(),
+					urlUrl.getPort());
+			AuthCache authCache = new BasicAuthCache();
+			BasicScheme basicScheme = new BasicScheme();
+			authCache.put(targetHost, basicScheme);
+			context.setAuthCache(authCache);
+			context.setCredentialsProvider(credentialsProvider);
 		}
 
 		HttpGet httpGet;
@@ -105,7 +123,7 @@ public class GraphiteDatasource implements Datasource {
 
 		HttpResponse httpResponse;
 		try {
-			httpResponse = httpClient.execute(httpGet);
+			httpResponse = httpClient.execute(httpGet, context);
 		} catch (ClientProtocolException e) {
 			LOG.error("client protocol error: " + e.getMessage());
 			return new double[] {};
@@ -152,6 +170,11 @@ public class GraphiteDatasource implements Datasource {
 			} else {
 				values[idx] = 0;
 			}
+		}
+		try {
+			httpClient.close();
+		} catch (IOException e) {
+			LOG.warn("could not close HTTP client");
 		}
 		return values;
 	}
