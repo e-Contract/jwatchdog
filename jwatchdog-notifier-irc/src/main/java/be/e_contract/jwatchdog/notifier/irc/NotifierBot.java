@@ -1,6 +1,7 @@
 /*
  * Java Watchdog Project.
  * Copyright (C) 2013 Frank Cornelis.
+ * Copyright (C) 2014 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -56,7 +57,7 @@ public class NotifierBot extends ListenerAdapter<PircBotX> {
 		Channel channel = event.getChannel();
 		LOG.debug("joined: " + channel.getName());
 		LOG.debug("sending message: " + this.message);
-		pircBotX.sendMessage(channel, this.message);
-		pircBotX.disconnect();
+		channel.send().message(this.message);
+		pircBotX.sendIRC().quitServer();
 	}
 }
