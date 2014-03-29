@@ -1,6 +1,7 @@
 /*
  * Java Watchdog Project.
  * Copyright (C) 2013 Frank Cornelis.
+ * Copyright (C) 2014 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -22,9 +23,9 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
-import org.pircbotx.exception.NickAlreadyInUseException;
 
 import be.e_contract.jwatchdog.Context;
 import be.e_contract.jwatchdog.notifier.Notifier;
@@ -53,16 +54,15 @@ public class IRCNotifier implements Notifier {
 	@Override
 	public void notify(String message) {
 		LOG.debug("IRC notification: " + message);
-		PircBotX pircBotX = new PircBotX();
-		pircBotX.setName(this.name);
 		NotifierBot notifierBot = new NotifierBot(message);
-		pircBotX.getListenerManager().addListener(notifierBot);
+		Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
+				.setName(this.name).addListener(notifierBot)
+				.setServerHostname(this.server)
+				.addAutoJoinChannel(this.channel).buildConfiguration();
+		PircBotX pircBotX = new PircBotX(configuration);
 		LOG.debug("connecting to IRC server: " + this.server);
 		try {
-			pircBotX.connect(this.server);
-		} catch (NickAlreadyInUseException e) {
-			LOG.error("nick already used: " + this.name);
-			return;
+			pircBotX.startBot();
 		} catch (IOException e) {
 			LOG.error("IO error: " + e.getMessage());
 			return;
@@ -70,14 +70,6 @@ public class IRCNotifier implements Notifier {
 			LOG.debug("IRC error: " + e.getMessage());
 			return;
 		}
-		pircBotX.joinChannel(this.channel);
-
-		try {
-			synchronized (notifierBot) {
-				notifierBot.wait();
-			}
-		} catch (InterruptedException e) {
-			LOG.error("wait error: " + e.getMessage());
-		}
+		LOG.debug("notification done");
 	}
 }
