@@ -1,6 +1,7 @@
 /*
  * Java Watchdog Project.
  * Copyright (C) 2013-2014 Frank Cornelis.
+ * Copyright (C) 2015 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -25,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -94,7 +97,12 @@ public class GraphiteDatasource implements Datasource {
 		HttpClientContext context = HttpClientContext.create();
 
 		if (null != this.credentialName) {
-			Credential credential = this.context.getCredential(credentialName);
+			Credential credential = this.context
+					.getCredential(this.credentialName);
+			if (null == credential) {
+				LOG.error("unknown credential: " + this.credentialName);
+				return new double[] {};
+			}
 			LOG.debug("setting credential for " + urlUrl.getHost() + ":"
 					+ urlUrl.getPort());
 			CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
@@ -162,13 +170,13 @@ public class GraphiteDatasource implements Datasource {
 		GraphiteResult result = results[0];
 		LOG.debug("actual target: " + result.target);
 		Double[][] datapoints = result.datapoints;
-		double[] values = new double[datapoints.length];
+		List<Double> values = new LinkedList<Double>();
 		for (int idx = 0; idx < datapoints.length; idx++) {
 			Double value = datapoints[datapoints.length - idx - 1][0];
 			if (null != value) {
-				values[idx] = value;
+				values.add(value);
 			} else {
-				values[idx] = 0;
+				LOG.debug("null value");
 			}
 		}
 		try {
@@ -176,7 +184,13 @@ public class GraphiteDatasource implements Datasource {
 		} catch (IOException e) {
 			LOG.warn("could not close HTTP client");
 		}
-		return values;
+		double[] arrayValues = new double[values.size()];
+		int idx = 0;
+		for (Double value : values) {
+			arrayValues[idx] = value;
+			idx++;
+		}
+		return arrayValues;
 	}
 
 	@Override
